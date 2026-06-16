@@ -115,6 +115,30 @@ section { padding: clamp(2.4rem, 5vw, 3.6rem) 0; }
 /* Platzhalter-Markierung (nur waehrend des Aufbaus) */
 .platzhalter { color: var(--farbe-text-leise); font-style: italic; }
 
+/* Kontakt-Zeilen in Standort-Karten */
+.kontakt-liste { list-style: none; margin: .5rem 0 0; padding: 0; }
+.kontakt-liste li { margin: .25rem 0; }
+.kontakt-liste .label { color: var(--farbe-text-leise); display: inline-block; min-width: 3.2rem; }
+
+/* Oeffnungszeiten-Tabelle */
+.zeiten { width: 100%; border-collapse: collapse; margin: .5rem 0 0; }
+.zeiten th, .zeiten td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid var(--farbe-rand); vertical-align: top; }
+.zeiten th { width: 3rem; color: var(--farbe-primaer-dunkel); font-family: var(--font-headline); }
+.zeiten .zu { color: var(--farbe-text-leise); }
+
+/* Mehrspaltige Leistungs-Listen */
+.spalten { columns: 2; column-gap: 2.5rem; }
+.spalten li { break-inside: avoid; margin: .2rem 0; }
+@media (max-width: 620px) { .spalten { columns: 1; } }
+
+/* Badge fuer Status-Hinweise (z.B. "aktuell nur Terminsprechstunde") */
+.badge { display: inline-block; background: var(--farbe-bg-leise); color: var(--farbe-primaer-dunkel); border: 1px solid var(--farbe-rand); border-radius: 999px; padding: .15rem .7rem; font-size: .85rem; font-weight: 600; }
+
+/* Listen mit etwas Luft */
+.inhalt ul { padding-left: 1.2rem; }
+.inhalt li { margin: .3rem 0; }
+.inhalt h3 { margin-top: 1.8rem; color: var(--farbe-primaer-dunkel); }
+
 /* --- Fusszeile --- */
 .site-footer { background: var(--farbe-navy); color: #b9c6cf; margin-top: 0; padding: 3rem 0 1.5rem; }
 .site-footer a { color: #fff; }
