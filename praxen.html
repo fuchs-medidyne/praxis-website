@@ -6,27 +6,13 @@
   <title>Praxen — Hausarztcenter Albstadt</title>
   <meta name="description" content="Die Standorte des Hausarztcenter Albstadt: Albstadt-Ebingen (Europaplatz 3) und Albstadt-Tailfingen (Adlerstraße 24) — Öffnungszeiten, Kontakt und Anfahrt.">
   <link rel="stylesheet" href="css/style.css">
+  <script defer src="data/site.js"></script>
+  <script defer src="js/render.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 
-  <header class="site-header">
-    <div class="container">
-      <a class="logo" href="index.html"><img src="bilder/logo-hausarztcenter-albstadt.png" alt="Hausarztcenter Albstadt — Startseite"></a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="hauptnavigation" aria-label="Menü öffnen">☰</button>
-      <nav class="main-nav" id="hauptnavigation" aria-label="Hauptnavigation">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="aktuell.html">Aktuell</a></li>
-          <li><a href="praxen.html" aria-current="page">Praxen</a></li>
-          <li><a href="aerzte-team.html">Ärzte &amp; Team</a></li>
-          <li><a href="behandlungsspektrum.html">Behandlungsspektrum</a></li>
-          <li><a href="stellenangebote.html">Stellenangebote</a></li>
-          <li><a href="service-kontakt.html">Service &amp; Kontakt</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div data-component="site-header"></div>
 
   <main id="inhalt">
     <section class="page-hero">
@@ -60,85 +46,17 @@
             Haus gibt es viele Parkplätze. Die Wege im Haus sind eben und behindertengerecht, es gibt
             zwei Aufzüge. Für Infektpatienten gibt es einen eigenen Warte- und Behandlungsbereich.</li>
       </ul>
-      <p><a class="btn" href="https://termin.samedi.de/b/berufsausubungsgemeinschaft-gbr-dr-med-diebold-dr-med-schmid-c-fuchs/1" target="_blank" rel="noopener">Online-Termin vereinbaren</a></p>
+      <p><a class="btn" data-href="samedi" href="https://termin.samedi.de/b/berufsausubungsgemeinschaft-gbr-dr-med-diebold-dr-med-schmid-c-fuchs/1" target="_blank" rel="noopener">Online-Termin vereinbaren</a></p>
     </section>
 
     <section class="section-leise">
       <div class="container">
-        <div class="karten">
-          <article class="karte">
-            <h3>Praxis Albstadt-Ebingen</h3>
-            <ul class="kontakt-liste">
-              <li>Europaplatz 3, 72458 Albstadt</li>
-              <li><span class="label">Tel.</span> <a href="tel:+497431933420">07431 933420</a></li>
-              <li><span class="label">Fax</span> 07431 9334220</li>
-              <li>Barrierefreier, behindertengerechter Zugang</li>
-            </ul>
-            <p><span class="badge">aktuell Notfall- und Terminsprechstunde</span></p>
-            <table class="zeiten">
-              <tbody>
-                <tr><th scope="row">Mo</th><td>08:00–11:00 &nbsp;·&nbsp; 15:00–18:00</td></tr>
-                <tr><th scope="row">Di</th><td>08:00–11:00 &nbsp;·&nbsp; 15:00–18:00</td></tr>
-                <tr><th scope="row">Mi</th><td>08:00–11:00 &nbsp;·&nbsp; 15:00–18:00</td></tr>
-                <tr><th scope="row">Do</th><td>08:00–11:00 &nbsp;·&nbsp; 15:00–18:00</td></tr>
-                <tr><th scope="row">Fr</th><td>08:00–11:00 &nbsp;·&nbsp; <span class="zu">nachmittags geschlossen</span></td></tr>
-              </tbody>
-            </table>
-            <p style="margin-top:1rem">Geplante Schließungen 2026: 04.05.–08.05.2026 · 16.11.–20.11.2026<br>
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=Europaplatz+3,+72458+Albstadt" target="_blank" rel="noopener">Route planen (Google Maps)</a></p>
-          </article>
-          <article class="karte">
-            <h3>Praxis Albstadt-Tailfingen</h3>
-            <ul class="kontakt-liste">
-              <li>Adlerstraße 24, 72461 Albstadt</li>
-              <li><span class="label">Tel.</span> <a href="tel:+4974322009150">07432 2009150</a></li>
-              <li><span class="label">Fax</span> 07432 20091516</li>
-            </ul>
-            <p><span class="badge">aktuell nur Terminsprechstunde</span></p>
-            <table class="zeiten">
-              <tbody>
-                <tr><th scope="row">Mo</th><td>08:00–11:00 &nbsp;·&nbsp; 15:00–18:00</td></tr>
-                <tr><th scope="row">Di</th><td>08:00–11:00 &nbsp;·&nbsp; <span class="zu">nachmittags geschlossen</span></td></tr>
-                <tr><th scope="row">Mi</th><td>08:00–11:00 &nbsp;·&nbsp; <span class="zu">nachmittags geschlossen</span></td></tr>
-                <tr><th scope="row">Do</th><td>08:00–11:00 &nbsp;·&nbsp; <span class="zu">nachmittags geschlossen</span></td></tr>
-                <tr><th scope="row">Fr</th><td>08:00–11:00 &nbsp;·&nbsp; <span class="zu">nachmittags geschlossen</span></td></tr>
-              </tbody>
-            </table>
-            <p style="margin-top:1rem">Geplante Schließungen 2026: 30.03.–24.04.2026 · 04.05.–08.05.2026 · 15.05.2026 · 01.06.–05.06.2026<br>
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=Adlerstra%C3%9Fe+24,+72461+Albstadt" target="_blank" rel="noopener">Route planen (Google Maps)</a></p>
-          </article>
-        </div>
+        <div data-component="standorte" data-variant="voll"></div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h3>Hausarztcenter Albstadt</h3>
-          <p>Überörtliche Berufsausübungsgemeinschaft<br>Dr. med. F. Diebold · Dr. med. C. Fuchs</p>
-        </div>
-        <div>
-          <h3>Albstadt-Ebingen</h3>
-          <p>Europaplatz 3, 72458 Albstadt<br>Tel. <a href="tel:+497431933420">07431 933420</a></p>
-        </div>
-        <div>
-          <h3>Albstadt-Tailfingen</h3>
-          <p>Adlerstraße 24, 72461 Albstadt<br>Tel. <a href="tel:+4974322009150">07432 2009150</a></p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Hausarztcenter Albstadt</span>
-        <nav aria-label="Rechtliches">
-          <a href="impressum.html">Impressum</a>
-          <a href="datenschutz.html">Datenschutz</a>
-          <a href="barrierefreiheit.html">Barrierefreiheit</a>
-        </nav>
-      </div>
-    </div>
-  </footer>
+  <div data-component="site-footer"></div>
 
-  <script src="js/main.js"></script>
 </body>
 </html>

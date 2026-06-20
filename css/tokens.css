@@ -1,0 +1,94 @@
+/* =============================================================================
+   DESIGN-KONVENTIONEN — Hausarztcenter Albstadt
+   Single Source of Truth fuer das visuelle Erscheinungsbild.
+
+   Hier — und NUR hier — werden Farben, Schriften, Schriftgroessen (je nach
+   Position: H1/H2/H3/Text/Lead) und Abstaende definiert. Alle Stylesheets
+   benutzen ausschliesslich diese Variablen (Tokens). So bleibt das Design
+   konsistent und an EINER Stelle aenderbar (z.B. Akzentfarbe einmal anpassen
+   -> wirkt ueberall).
+
+   Regel fuer den Code in style.css: KEINE festen Farb-/Groessen-/Abstandswerte
+   direkt schreiben — immer var(--token) verwenden. Neue Werte hier ergaenzen.
+   ========================================================================== */
+:root {
+
+  /* ===========================================================================
+     1. FARBEN
+     ========================================================================= */
+
+  /* -- Marke (aus Logo/Theme der Praxis) -- */
+  --farbe-primaer:        #0e536d;   /* Petrol — Hauptfarbe (Links, Akzente)   */
+  --farbe-primaer-dunkel: #0a3d50;   /* dunkler — Ueberschriften in Karten      */
+  --farbe-primaer-hell:   #1466a2;   /* heller — Verlaeufe, Fokus               */
+  --farbe-navy:           #0d1724;   /* fast schwarz-blau — Hero, Footer, H1-H4 */
+  --farbe-akzent:         #2bbf8a;   /* Tuerkis-Gruen — Buttons, Marker         */
+  --farbe-akzent-dunkel:  #25a878;   /* Button-Hover                            */
+
+  /* -- Text & Flaechen -- */
+  --farbe-text:           #243240;   /* Standard-Fliesstext                     */
+  --farbe-text-leise:     #5a6b78;   /* Nebensaechliches, Beschriftungen        */
+  --farbe-bg:             #ffffff;   /* Standard-Hintergrund                    */
+  --farbe-bg-leise:       #f4f6f8;   /* abgesetzte Abschnitte/Karten            */
+  --farbe-rand:           #e1e8ec;   /* Linien, Kartenraender                   */
+  --farbe-text-invers:        #ffffff;  /* Text auf dunklem Grund               */
+  --farbe-text-invers-leise:  #e9f1f4;  /* gedaempfter Text auf dunklem Grund   */
+
+  /* ===========================================================================
+     2. SCHRIFT
+     ========================================================================= */
+
+  /* -- Schriftfamilien (selbst gehostet, siehe fonts.css) -- */
+  --font-text:     "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-headline: "Montserrat", var(--font-text);   /* alle Ueberschriften     */
+
+  /* -- Schriftgroessen je nach Position --
+     clamp(min, fluid, max) = skaliert sanft mit der Fensterbreite.            */
+  --groesse-h1:    clamp(1.9rem, 4vw, 2.6rem);    /* Seitentitel (1x pro Seite) */
+  --groesse-h2:    clamp(1.45rem, 2.6vw, 1.9rem); /* Abschnitts-Ueberschrift    */
+  --groesse-h3:    1.2rem;                          /* Karten-/Block-Titel       */
+  --groesse-h4:    1rem;                            /* Unter-Ueberschrift        */
+  --groesse-lead:  clamp(1.05rem, 2vw, 1.25rem);  /* Einleitungs-Absatz (Hero)  */
+  --groesse-text:  1.05rem;                         /* Standard-Fliesstext       */
+  --groesse-klein: .9rem;                           /* Fussnoten, Badges, Datum  */
+
+  /* -- Schriftstaerken -- */
+  --staerke-text:     400;
+  --staerke-halbfett: 600;
+  --staerke-fett:     700;
+
+  /* -- Zeilenhoehen -- */
+  --zeilenhoehe:     1.65;   /* Fliesstext (luftig, gut lesbar)                 */
+  --zeilenhoehe-eng: 1.2;    /* Ueberschriften                                  */
+
+  /* ===========================================================================
+     3. ABSTAENDE  (eine einzige Skala — Schritte ~ x1.5)
+        Ueberall NUR diese Stufen benutzen, damit Abstaende einheitlich sind.
+     ========================================================================= */
+  --raum-1: .25rem;
+  --raum-2: .5rem;
+  --raum-3: .75rem;
+  --raum-4: 1rem;
+  --raum-5: 1.5rem;
+  --raum-6: 2rem;
+  --raum-7: 3rem;
+  --raum-8: 4rem;
+
+  /* -- Abgeleitete, benannte Abstaende (fuer einheitliche Rhythmik) -- */
+  --abschnitt-y:    clamp(1.6rem, 3.2vw, 2.4rem);  /* Innenabstand oben/unten JEDES Abschnitts */
+  --container-x:    1.25rem;                     /* seitlicher Rand des Inhalts-Containers    */
+  --titel-abstand:  var(--raum-4);              /* Ueberschrift -> Folgetext                 */
+  --absatz-abstand: var(--raum-4);              /* Abstand zwischen Absaetzen                */
+  --block-abstand:  var(--raum-5);              /* Abstand zwischen groesseren Bloecken      */
+
+  /* ===========================================================================
+     4. FORM (Breiten, Rundungen, Schatten)
+     ========================================================================= */
+  --breite-max:   1140px;   /* maximale Layout-Breite                           */
+  --breite-text:  68ch;     /* optimale Lesebreite fuer Fliesstext             */
+  --radius:       12px;     /* Karten                                           */
+  --radius-s:     8px;      /* Buttons, kleine Flaechen                         */
+  --radius-pill:  999px;    /* Badges                                           */
+  --schatten:        0 4px 18px rgba(13, 23, 36, 0.08);
+  --schatten-stark:  0 10px 30px rgba(13, 23, 36, 0.14);
+}

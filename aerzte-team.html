@@ -6,27 +6,13 @@
   <title>Ärzte &amp; Team — Hausarztcenter Albstadt</title>
   <meta name="description" content="Das Behandlungs-Team des Hausarztcenter Albstadt — Ärztinnen, Ärzte und Praxisteam.">
   <link rel="stylesheet" href="css/style.css">
+  <script defer src="data/site.js"></script>
+  <script defer src="js/render.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 
-  <header class="site-header">
-    <div class="container">
-      <a class="logo" href="index.html"><img src="bilder/logo-hausarztcenter-albstadt.png" alt="Hausarztcenter Albstadt — Startseite"></a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="hauptnavigation" aria-label="Menü öffnen">☰</button>
-      <nav class="main-nav" id="hauptnavigation" aria-label="Hauptnavigation">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="aktuell.html">Aktuell</a></li>
-          <li><a href="praxen.html">Praxen</a></li>
-          <li><a href="aerzte-team.html" aria-current="page">Ärzte &amp; Team</a></li>
-          <li><a href="behandlungsspektrum.html">Behandlungsspektrum</a></li>
-          <li><a href="stellenangebote.html">Stellenangebote</a></li>
-          <li><a href="service-kontakt.html">Service &amp; Kontakt</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div data-component="site-header"></div>
 
   <main id="inhalt">
     <section class="page-hero">
@@ -37,46 +23,11 @@
     </section>
 
     <section class="container">
-      <div class="karten">
-          <article class="karte"><h3>Dr. Diebold</h3><p>Facharzt für Innere- und Allgemeinmedizin · Facharzt für Anästhesie · Notfallmedizin</p></article>
-          <article class="karte"><h3>Dr. Fuchs</h3><p>Facharzt für Allgemeinmedizin · Notfallmedizin</p></article>
-          <article class="karte"><h3>R. Prager</h3><p>Fachärztin für Innere Medizin</p></article>
-          <article class="karte"><h3>Dr. Muschelknautz</h3><p>Facharzt für Allgemeinmedizin</p></article>
-          <article class="karte"><h3>B. Butz</h3><p>Facharzt für Visceralchirurgie / Allgemeinmedizin (in Weiterbildung)</p></article>
-          <article class="karte"><h3>R. Petrescu</h3><p>Allgemeinmedizin (in Weiterbildung)</p></article>
-          <article class="karte"><h3>Dr. Friz</h3><p>Allgemeinmedizin (in Weiterbildung)</p></article>
-          <article class="karte"><h3>U. Schechtel</h3><p>Primary Care Managerin (PCM)</p></article>
-        </div>
+      <div data-component="team"></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h3>Hausarztcenter Albstadt</h3>
-          <p>Überörtliche Berufsausübungsgemeinschaft<br>Dr. med. F. Diebold · Dr. med. C. Fuchs</p>
-        </div>
-        <div>
-          <h3>Albstadt-Ebingen</h3>
-          <p>Europaplatz 3, 72458 Albstadt<br>Tel. <a href="tel:+497431933420">07431 933420</a></p>
-        </div>
-        <div>
-          <h3>Albstadt-Tailfingen</h3>
-          <p>Adlerstraße 24, 72461 Albstadt<br>Tel. <a href="tel:+4974322009150">07432 2009150</a></p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Hausarztcenter Albstadt</span>
-        <nav aria-label="Rechtliches">
-          <a href="impressum.html">Impressum</a>
-          <a href="datenschutz.html">Datenschutz</a>
-          <a href="barrierefreiheit.html">Barrierefreiheit</a>
-        </nav>
-      </div>
-    </div>
-  </footer>
+  <div data-component="site-footer"></div>
 
-  <script src="js/main.js"></script>
 </body>
 </html>

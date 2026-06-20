@@ -1,35 +1,10 @@
 /* Hausarztcenter Albstadt — Stylesheet.
-   Design-Tokens aus der bestehenden Praxis-Marke (Logo/Theme der Altseite):
-   Primaer #0E536D (Petrol), Navy #0D1724, Tuerkis-Akzent #32D296.
-   Schriften: Montserrat (Ueberschriften), Open Sans (Fliesstext) — selbst gehostet. */
+   Saemtliche Farben, Schriftgroessen und Abstaende kommen aus css/tokens.css
+   (Design-Konventionen / Single Source of Truth). Hier stehen nur Regeln, die
+   diese Tokens auf konkrete Elemente anwenden — keine festen Werte. */
 
 @import url("fonts.css");
-
-:root {
-  /* Marke */
-  --farbe-primaer: #0e536d;
-  --farbe-primaer-dunkel: #0a3d50;
-  --farbe-primaer-hell: #1466a2;
-  --farbe-navy: #0d1724;
-  --farbe-akzent: #2bbf8a;          /* Tuerkis-Gruen (aus #32d296, leicht gedaempft) */
-
-  /* Text & Flaechen */
-  --farbe-text: #243240;
-  --farbe-text-leise: #5a6b78;
-  --farbe-bg: #ffffff;
-  --farbe-bg-leise: #f4f6f8;
-  --farbe-rand: #e1e8ec;
-
-  /* Form */
-  --breite-max: 1140px;
-  --radius: 12px;
-  --radius-s: 8px;
-  --schatten: 0 4px 18px rgba(13, 23, 36, 0.08);
-  --schatten-stark: 0 10px 30px rgba(13, 23, 36, 0.14);
-
-  --font-text: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-headline: "Montserrat", var(--font-text);
-}
+@import url("tokens.css");
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -39,8 +14,8 @@ body {
   font-family: var(--font-text);
   color: var(--farbe-text);
   background: var(--farbe-bg);
-  line-height: 1.65;
-  font-size: 1.05rem;
+  line-height: var(--zeilenhoehe);
+  font-size: var(--groesse-text);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -51,32 +26,42 @@ a:hover { color: var(--farbe-primaer-dunkel); }
 
 :focus-visible { outline: 3px solid var(--farbe-primaer-hell); outline-offset: 2px; border-radius: 3px; }
 
-h1, h2, h3, h4 { font-family: var(--font-headline); color: var(--farbe-navy); line-height: 1.2; font-weight: 700; }
-h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0 0 .6rem; }
-h2 { font-size: clamp(1.45rem, 2.6vw, 1.9rem); margin: 0 0 1rem; }
-h3 { font-size: 1.2rem; }
+/* --- Typografie: Groesse je nach Position (aus den Tokens) --- */
+h1, h2, h3, h4 { font-family: var(--font-headline); color: var(--farbe-navy); line-height: var(--zeilenhoehe-eng); font-weight: var(--staerke-fett); }
+h1 { font-size: var(--groesse-h1); margin: 0 0 var(--raum-3); }
+h2 { font-size: var(--groesse-h2); margin: 0 0 var(--titel-abstand); }
+h3 { font-size: var(--groesse-h3); }
+h4 { font-size: var(--groesse-h4); }
+p  { margin: 0 0 var(--absatz-abstand); }
+p:last-child { margin-bottom: 0; }
 
-.container { max-width: var(--breite-max); margin: 0 auto; padding: 0 1.25rem; }
+/* Einleitungs-Absatz (z.B. unter einer Ueberschrift) */
+.lead { font-size: var(--groesse-lead); color: var(--farbe-text-leise); }
+
+/* Container setzt NUR den seitlichen Rand (padding-inline) — niemals den
+   vertikalen, damit Abschnitte mit Klasse .container ihren Abschnitts-Abstand
+   (--abschnitt-y) behalten. */
+.container { max-width: var(--breite-max); margin: 0 auto; padding-inline: var(--container-x); }
 
 /* --- Skip-Link --- */
-.skip-link { position: absolute; left: -999px; top: 0; background: var(--farbe-primaer); color: #fff; padding: .6rem 1rem; z-index: 1000; border-radius: 0 0 var(--radius-s) 0; }
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--farbe-primaer); color: var(--farbe-text-invers); padding: var(--raum-2) var(--raum-4); z-index: 1000; border-radius: 0 0 var(--radius-s) 0; }
 .skip-link:focus { left: 0; }
 
 /* --- Kopfzeile / Navigation --- */
 .site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--farbe-rand); }
-.site-header .container { display: flex; align-items: center; justify-content: space-between; min-height: 74px; gap: 1rem; }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; min-height: 74px; gap: var(--raum-4); }
 .logo { display: inline-flex; align-items: center; text-decoration: none; }
 .logo img { height: 44px; width: auto; }
 
 .nav-toggle { display: none; background: none; border: 1px solid var(--farbe-rand); border-radius: var(--radius-s); padding: .45rem .65rem; font-size: 1.25rem; line-height: 1; cursor: pointer; color: var(--farbe-navy); }
 
 .main-nav ul { list-style: none; display: flex; gap: .15rem; margin: 0; padding: 0; flex-wrap: wrap; }
-.main-nav a { display: block; padding: .55rem .75rem; border-radius: var(--radius-s); text-decoration: none; color: var(--farbe-navy); font-weight: 600; font-size: .97rem; }
+.main-nav a { display: block; padding: var(--raum-2) var(--raum-3); border-radius: var(--radius-s); text-decoration: none; color: var(--farbe-navy); font-weight: var(--staerke-halbfett); font-size: .97rem; }
 .main-nav a:hover { background: var(--farbe-bg-leise); color: var(--farbe-primaer); }
 .main-nav a[aria-current="page"] { color: var(--farbe-primaer); box-shadow: inset 0 -3px 0 var(--farbe-primaer); border-radius: 0; }
 
-/* --- Hero --- */
-.hero { position: relative; color: #fff; padding: clamp(3rem, 8vw, 6rem) 0; background: var(--farbe-navy); overflow: hidden; }
+/* --- Hero (Startseite) --- */
+.hero { position: relative; color: var(--farbe-text-invers); padding: var(--abschnitt-y) 0; background: var(--farbe-navy); overflow: hidden; }
 .hero::before {
   content: ""; position: absolute; inset: 0;
   background:
@@ -84,45 +69,80 @@ h3 { font-size: 1.2rem; }
     url("../bilder/hero-hausarzt-albstadt.jpg") center/cover no-repeat;
   z-index: 0;
 }
-.hero .container { position: relative; z-index: 1; }
-.hero h1 { color: #fff; }
-.hero p { font-size: clamp(1.05rem, 2vw, 1.25rem); margin: 0 0 1.6rem; max-width: 42rem; color: #e9f1f4; }
-.hero-aktionen { display: flex; gap: .75rem; flex-wrap: wrap; }
+.hero .container { position: relative; z-index: 1; text-align: center; }
+.hero h1 { color: var(--farbe-text-invers); }
+.hero p { font-size: var(--groesse-lead); margin: 0 auto var(--raum-5); max-width: 42rem; color: var(--farbe-text-invers-leise); }
+.hero-aktionen { display: flex; gap: var(--raum-3); flex-wrap: wrap; justify-content: center; }
 
 /* Schlichter Seiten-Kopf fuer Unterseiten (Petrol-Verlauf, ohne grosses Hero-Bild) */
-.page-hero { position: relative; color: #fff; padding: clamp(2.2rem, 5vw, 3.4rem) 0; background: linear-gradient(110deg, var(--farbe-primaer-dunkel), var(--farbe-primaer-hell)); }
-.page-hero h1 { color: #fff; }
-.page-hero p { color: #e9f1f4; margin-bottom: 0; max-width: 46rem; }
+.page-hero { position: relative; color: var(--farbe-text-invers); padding: clamp(2.2rem, 5vw, 3.4rem) 0; background: linear-gradient(110deg, var(--farbe-primaer-dunkel), var(--farbe-primaer-hell)); }
+.page-hero .container { text-align: center; }
+.page-hero h1 { color: var(--farbe-text-invers); }
+.page-hero p { color: var(--farbe-text-invers-leise); font-size: var(--groesse-lead); margin: 0 auto; max-width: 46rem; }
 
 /* --- Buttons --- */
-.btn { display: inline-block; background: var(--farbe-akzent); color: #08312a; padding: .8rem 1.4rem; border-radius: var(--radius-s); text-decoration: none; font-family: var(--font-headline); font-weight: 600; border: 2px solid var(--farbe-akzent); transition: transform .08s ease, background .15s ease; }
-.btn:hover { background: #25a878; border-color: #25a878; color: #06281f; transform: translateY(-1px); }
-.btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,.7); }
-.btn-outline:hover { background: rgba(255,255,255,.14); color: #fff; transform: translateY(-1px); }
+.btn { display: inline-block; background: var(--farbe-akzent); color: #08312a; padding: .8rem 1.4rem; border-radius: var(--radius-s); text-decoration: none; font-family: var(--font-headline); font-weight: var(--staerke-halbfett); border: 2px solid var(--farbe-akzent); transition: transform .08s ease, background .15s ease; }
+.btn:hover { background: var(--farbe-akzent-dunkel); border-color: var(--farbe-akzent-dunkel); color: #06281f; transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--farbe-text-invers); border-color: rgba(255,255,255,.7); }
+.btn-outline:hover { background: rgba(255,255,255,.14); color: var(--farbe-text-invers); transform: translateY(-1px); }
 
-/* --- Abschnitte --- */
-section { padding: clamp(2.4rem, 5vw, 3.6rem) 0; }
+/* --- Abschnitte: EINHEITLICHER Innenabstand oben/unten --- */
+section { padding: var(--abschnitt-y) 0; }
 .section-leise { background: var(--farbe-bg-leise); }
 
-.hinweis { border-left: 4px solid var(--farbe-akzent); background: var(--farbe-bg-leise); padding: 1rem 1.25rem; border-radius: 0 var(--radius-s) var(--radius-s) 0; margin: 0 0 1.5rem; }
+/* Zentrierter Abschnitts-Kopf (Ueberschrift + Einleitung ueber Kachelrastern) */
+.section-kopf { text-align: center; max-width: 52rem; margin: 0 auto var(--raum-6); }
+.section-kopf p { color: var(--farbe-text-leise); }
+
+/* Lese-Inhalte: angenehme Lesebreite, linksbuendig */
+.inhalt > p, .inhalt > ul, .inhalt > ol { max-width: var(--breite-text); }
+
+.hinweis { border-left: 4px solid var(--farbe-akzent); background: var(--farbe-bg-leise); padding: var(--raum-4) var(--raum-5); border-radius: 0 var(--radius-s) var(--radius-s) 0; margin: 0 0 var(--block-abstand); }
 
 /* --- Karten-Raster --- */
-.karten { display: grid; gap: 1.4rem; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
-.karte { border: 1px solid var(--farbe-rand); border-radius: var(--radius); padding: 1.5rem; background: var(--farbe-bg); box-shadow: var(--schatten); transition: transform .12s ease, box-shadow .12s ease; }
+.karten { display: grid; gap: var(--raum-5); grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+.karte { border: 1px solid var(--farbe-rand); border-radius: var(--radius); padding: var(--raum-5); background: var(--farbe-bg); box-shadow: var(--schatten); transition: transform .12s ease, box-shadow .12s ease; }
 .karte:hover { transform: translateY(-3px); box-shadow: var(--schatten-stark); }
 .karte h3 { margin-top: 0; color: var(--farbe-primaer-dunkel); }
+
+/* Ausrichtung: Teaser-/Navigationskacheln sind zentriert (kurz, symmetrisch);
+   Daten-/Listenkarten bleiben linksbuendig (siehe .kontakt-liste/.zeiten). */
+.karten--teaser .karte { text-align: center; }
+
+/* Personen-Karten (Team) mit Foto oben — zentriert */
+.karte--person { text-align: center; }
+.karte--person p { color: var(--farbe-text-leise); }
+.person-foto { width: 128px; height: 128px; border-radius: 50%; margin: 0 auto var(--raum-4); overflow: hidden; background: var(--farbe-bg-leise); }
+.person-foto img { width: 100%; height: 100%; object-fit: cover; }
+/* Foto-Platzhalter: Marken-Silhouette, bis die echten Fotos da sind.
+   Zum Tauschen: <div class="person-foto person-foto--platzhalter">…</div>
+   ersetzen durch <div class="person-foto"><img src="bilder/team/NAME.jpg" alt="…"></div> */
+.person-foto--platzhalter {
+  display: grid; place-items: center;
+  background: linear-gradient(150deg, var(--farbe-primaer-hell), var(--farbe-primaer-dunkel));
+  background-image: linear-gradient(150deg, var(--farbe-primaer-hell), var(--farbe-primaer-dunkel)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' fill-opacity='0.82' d='M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 6v2h18v-2c0-3.5-4-6-9-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center, center 58%;
+  background-size: cover, 58px 58px;
+}
+
+/* News-/Aktuelles-Eintraege */
+.news-item { border: 1px solid var(--farbe-rand); border-left: 4px solid var(--farbe-akzent); border-radius: 0 var(--radius-s) var(--radius-s) 0; background: var(--farbe-bg); padding: var(--raum-5) var(--raum-5); margin: 0 0 var(--block-abstand); box-shadow: var(--schatten); }
+.news-item h2 { margin: var(--raum-1) 0 var(--raum-2); }
+.news-datum { color: var(--farbe-text-leise); font-size: var(--groesse-klein); margin: 0 0 var(--raum-1); text-transform: uppercase; letter-spacing: .03em; }
 
 /* Platzhalter-Markierung (nur waehrend des Aufbaus) */
 .platzhalter { color: var(--farbe-text-leise); font-style: italic; }
 
-/* Kontakt-Zeilen in Standort-Karten */
-.kontakt-liste { list-style: none; margin: .5rem 0 0; padding: 0; }
-.kontakt-liste li { margin: .25rem 0; }
+/* Kontakt-Zeilen in Standort-Karten (linksbuendig, Datencharakter) */
+.kontakt-liste { list-style: none; margin: var(--raum-2) 0 0; padding: 0; }
+.kontakt-liste li { margin: var(--raum-1) 0; }
 .kontakt-liste .label { color: var(--farbe-text-leise); display: inline-block; min-width: 3.2rem; }
 
 /* Oeffnungszeiten-Tabelle */
-.zeiten { width: 100%; border-collapse: collapse; margin: .5rem 0 0; }
-.zeiten th, .zeiten td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid var(--farbe-rand); vertical-align: top; }
+.zeiten { width: 100%; border-collapse: collapse; margin: var(--raum-2) 0 0; }
+.zeiten th, .zeiten td { text-align: left; padding: .35rem var(--raum-2); border-bottom: 1px solid var(--farbe-rand); vertical-align: top; }
 .zeiten th { width: 3rem; color: var(--farbe-primaer-dunkel); font-family: var(--font-headline); }
 .zeiten .zu { color: var(--farbe-text-leise); }
 
@@ -132,29 +152,29 @@ section { padding: clamp(2.4rem, 5vw, 3.6rem) 0; }
 @media (max-width: 620px) { .spalten { columns: 1; } }
 
 /* Badge fuer Status-Hinweise (z.B. "aktuell nur Terminsprechstunde") */
-.badge { display: inline-block; background: var(--farbe-bg-leise); color: var(--farbe-primaer-dunkel); border: 1px solid var(--farbe-rand); border-radius: 999px; padding: .15rem .7rem; font-size: .85rem; font-weight: 600; }
+.badge { display: inline-block; background: var(--farbe-bg-leise); color: var(--farbe-primaer-dunkel); border: 1px solid var(--farbe-rand); border-radius: var(--radius-pill); padding: .15rem .7rem; font-size: var(--groesse-klein); font-weight: var(--staerke-halbfett); }
 
-/* Listen mit etwas Luft */
+/* Listen/Unter-Ueberschriften in Lese-Abschnitten */
 .inhalt ul { padding-left: 1.2rem; }
-.inhalt li { margin: .3rem 0; }
-.inhalt h3 { margin-top: 1.8rem; color: var(--farbe-primaer-dunkel); }
-.inhalt h4 { font-size: 1rem; margin: 1.1rem 0 .2rem; color: var(--farbe-navy); }
+.inhalt li { margin: var(--raum-1) 0; }
+.inhalt h3 { margin-top: var(--raum-6); color: var(--farbe-primaer-dunkel); }
+.inhalt h4 { margin: var(--raum-4) 0 var(--raum-1); color: var(--farbe-navy); }
 
 /* --- Fusszeile --- */
-.site-footer { background: var(--farbe-navy); color: #b9c6cf; margin-top: 0; padding: 3rem 0 1.5rem; }
-.site-footer a { color: #fff; }
-.footer-grid { display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-.site-footer h3 { color: #fff; font-size: 1.05rem; margin: 0 0 .6rem; }
-.footer-bottom { margin-top: 2rem; padding-top: 1.1rem; border-top: 1px solid rgba(255,255,255,.14); font-size: .9rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: space-between; align-items: center; }
-.footer-bottom nav a { margin-right: 1.1rem; }
+.site-footer { background: var(--farbe-navy); color: #b9c6cf; margin-top: 0; padding: var(--raum-7) 0 var(--raum-5); }
+.site-footer a { color: var(--farbe-text-invers); }
+.footer-grid { display: grid; gap: var(--raum-6); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.site-footer h3 { color: var(--farbe-text-invers); font-size: 1.05rem; margin: 0 0 var(--raum-3); }
+.footer-bottom { margin-top: var(--raum-6); padding-top: var(--raum-4); border-top: 1px solid rgba(255,255,255,.14); font-size: var(--groesse-klein); display: flex; gap: var(--raum-4); flex-wrap: wrap; justify-content: space-between; align-items: center; }
+.footer-bottom nav a { margin-right: var(--raum-4); }
 
 /* --- Mobil --- */
 @media (max-width: 880px) {
   .nav-toggle { display: block; }
-  .main-nav { display: none; position: absolute; left: 0; right: 0; top: 74px; background: #fff; border-bottom: 1px solid var(--farbe-rand); padding: .5rem 1.25rem 1rem; box-shadow: var(--schatten); }
+  .main-nav { display: none; position: absolute; left: 0; right: 0; top: 74px; background: #fff; border-bottom: 1px solid var(--farbe-rand); padding: var(--raum-2) var(--container-x) var(--raum-4); box-shadow: var(--schatten); }
   .main-nav.open { display: block; }
   .main-nav ul { flex-direction: column; gap: 0; }
-  .main-nav a { padding: .85rem .5rem; border-bottom: 1px solid var(--farbe-rand); border-radius: 0; }
+  .main-nav a { padding: .85rem var(--raum-2); border-bottom: 1px solid var(--farbe-rand); border-radius: 0; }
   .main-nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--farbe-primaer); }
 }
 

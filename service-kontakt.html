@@ -6,27 +6,13 @@
   <title>Service &amp; Kontakt — Hausarztcenter Albstadt</title>
   <meta name="description" content="Kontakt, Online-Terminvergabe (SAMEDI) und Service des Hausarztcenter Albstadt — Standorte Ebingen und Tailfingen.">
   <link rel="stylesheet" href="css/style.css">
+  <script defer src="data/site.js"></script>
+  <script defer src="js/render.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 
-  <header class="site-header">
-    <div class="container">
-      <a class="logo" href="index.html"><img src="bilder/logo-hausarztcenter-albstadt.png" alt="Hausarztcenter Albstadt — Startseite"></a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="hauptnavigation" aria-label="Menü öffnen">☰</button>
-      <nav class="main-nav" id="hauptnavigation" aria-label="Hauptnavigation">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="aktuell.html">Aktuell</a></li>
-          <li><a href="praxen.html">Praxen</a></li>
-          <li><a href="aerzte-team.html">Ärzte &amp; Team</a></li>
-          <li><a href="behandlungsspektrum.html">Behandlungsspektrum</a></li>
-          <li><a href="stellenangebote.html">Stellenangebote</a></li>
-          <li><a href="service-kontakt.html" aria-current="page">Service &amp; Kontakt</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div data-component="site-header"></div>
 
   <main id="inhalt">
     <section class="page-hero">
@@ -40,7 +26,7 @@
       <p>Viele Anliegen erledigen Sie bequem online über unsere Online-Rezeption bzw. die
          Online-Terminvergabe – oder selbstverständlich telefonisch.</p>
       <div class="karten">
-        <article class="karte"><h3>Online-Termin (SAMEDI)</h3><p>Termine bequem online buchen.</p><a href="https://termin.samedi.de/b/berufsausubungsgemeinschaft-gbr-dr-med-diebold-dr-med-schmid-c-fuchs/1" target="_blank" rel="noopener">Zur Online-Terminvergabe</a></article>
+        <article class="karte"><h3>Online-Termin (SAMEDI)</h3><p>Termine bequem online buchen.</p><a data-href="samedi" href="https://termin.samedi.de/b/berufsausubungsgemeinschaft-gbr-dr-med-diebold-dr-med-schmid-c-fuchs/1" target="_blank" rel="noopener">Zur Online-Terminvergabe</a></article>
         <article class="karte"><h3>Akut- / Infektsprechstunde (Ebingen)</h3><p>Buchung über unsere Online-Rezeption.</p></article>
         <article class="karte"><h3>Rezept anfordern</h3><p>Über unsere Online-Rezeption.</p></article>
         <article class="karte"><h3>Überweisung anfordern</h3><p>Über unsere Online-Rezeption.</p></article>
@@ -51,57 +37,12 @@
 
     <section class="section-leise">
       <div class="container">
-        <div class="karten">
-          <article class="karte">
-            <h3>Praxis Albstadt-Ebingen</h3>
-            <ul class="kontakt-liste">
-              <li>Europaplatz 3, 72458 Albstadt</li>
-              <li><span class="label">Tel.</span> <a href="tel:+497431933420">07431 933420</a></li>
-              <li><span class="label">Fax</span> 07431 9334220</li>
-            </ul>
-            <p><a href="https://www.google.com/maps/search/?api=1&amp;query=Europaplatz+3,+72458+Albstadt" target="_blank" rel="noopener">Route planen (Google Maps)</a></p>
-          </article>
-          <article class="karte">
-            <h3>Praxis Albstadt-Tailfingen</h3>
-            <ul class="kontakt-liste">
-              <li>Adlerstraße 24, 72461 Albstadt</li>
-              <li><span class="label">Tel.</span> <a href="tel:+4974322009150">07432 2009150</a></li>
-              <li><span class="label">Fax</span> 07432 20091516</li>
-            </ul>
-            <p><a href="https://www.google.com/maps/search/?api=1&amp;query=Adlerstra%C3%9Fe+24,+72461+Albstadt" target="_blank" rel="noopener">Route planen (Google Maps)</a></p>
-          </article>
-        </div>
+        <div data-component="standorte" data-variant="kontakt"></div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h3>Hausarztcenter Albstadt</h3>
-          <p>Überörtliche Berufsausübungsgemeinschaft<br>Dr. med. F. Diebold · Dr. med. C. Fuchs</p>
-        </div>
-        <div>
-          <h3>Albstadt-Ebingen</h3>
-          <p>Europaplatz 3, 72458 Albstadt<br>Tel. <a href="tel:+497431933420">07431 933420</a></p>
-        </div>
-        <div>
-          <h3>Albstadt-Tailfingen</h3>
-          <p>Adlerstraße 24, 72461 Albstadt<br>Tel. <a href="tel:+4974322009150">07432 2009150</a></p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Hausarztcenter Albstadt</span>
-        <nav aria-label="Rechtliches">
-          <a href="impressum.html">Impressum</a>
-          <a href="datenschutz.html">Datenschutz</a>
-          <a href="barrierefreiheit.html">Barrierefreiheit</a>
-        </nav>
-      </div>
-    </div>
-  </footer>
+  <div data-component="site-footer"></div>
 
-  <script src="js/main.js"></script>
 </body>
 </html>
