@@ -23,6 +23,17 @@ window.PRAXIS = {
   // Kennung — nicht aendern, sonst bricht der Buchungslink.
   samediUrl: "https://termin.samedi.de/b/berufsausubungsgemeinschaft-gbr-dr-med-diebold-dr-med-schmid-c-fuchs/1",
 
+  // Externe Einbindungen. med321 = Online-Rezeption (321 MED GmbH); der Pfad
+  // enthaelt den Praxis-Account-Key (aus der Altseite uebernommen). Beide
+  // Scripts werden von js/render.js auf jeder Seite geladen (ohne Consent-
+  // Gate — Entscheidung Christian 2026-07-07, Paritaet zur Altseite).
+  integrationen: {
+    med321: [
+      "https://321med7.com/cdn/server/921f15363c0fd134cbcd3e3f91e173b1021d8c2d/321med.js",
+      "https://321med-cdn.com/321med.js"
+    ]
+  },
+
   // Hauptnavigation (Reihenfolge = Anzeige-Reihenfolge).
   nav: [
     { href: "index.html",               text: "Home" },

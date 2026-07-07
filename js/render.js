@@ -24,6 +24,14 @@
     return "https://www.google.com/maps/search/?api=1&query=" + q;
   }
 
+  // Maps-Embed-URL (iframe) aus Adresse bauen — kein API-Key noetig. Wird als
+  // Zwei-Klick-Platzhalter eingesetzt; js/consent.js laedt das iframe erst
+  // nach Einwilligung.
+  function mapsEmbedUrl(s) {
+    var q = encodeURIComponent(s.strasse + ", " + s.plz + " " + s.ort);
+    return "https://www.google.com/maps?q=" + q + "&output=embed";
+  }
+
   // Datum "2026-07-01" -> "1. Juli 2026" (fuer News-Anzeige).
   var MONATE = ["Januar","Februar","März","April","Mai","Juni","Juli",
                 "August","September","Oktober","November","Dezember"];
@@ -61,7 +69,8 @@
     }).join("\n        ");
     var rechts = P.rechtsLinks.map(function (l) {
       return '<a href="' + l.href + '">' + l.text + '</a>';
-    }).join("\n          ");
+    }).join("\n          ") +
+      '\n          <a href="#" data-consent-oeffnen>Cookie-Einstellungen</a>';
     return '' +
       '<footer class="site-footer">\n' +
       '    <div class="container">\n' +
@@ -105,6 +114,11 @@
       h += '              <a href="' + mapsUrl(s) + '" target="_blank" rel="noopener">Route planen (Google Maps)</a></p>\n';
     } else {
       h += '            <p><a href="' + mapsUrl(s) + '" target="_blank" rel="noopener">Route planen (Google Maps)</a></p>\n';
+      // Anfahrtskarte (consent-gated, s. js/consent.js) — nur Kontakt-Variante,
+      // wie auf der Altseite (Karten auf Service & Kontakt).
+      h += '            <div class="maps-embed" data-consent-embed="google-maps"' +
+           ' data-embed-src="' + mapsEmbedUrl(s) + '"' +
+           ' data-embed-titel="Karte Praxis ' + s.name + '"></div>\n';
     }
     h += '          </article>';
     return h;
@@ -222,6 +236,38 @@
   });
 
   strukturdaten();
+
+  /* ---- 321 MED Online-Rezeption (Widget rechts unten, alle Seiten) ----
+     Laedt OHNE Consent-Gate (Entscheidung Christian 2026-07-07, Paritaet
+     zur Altseite). URLs zentral in data/site.js (integrationen.med321). */
+  if (P.integrationen && P.integrationen.med321) {
+    P.integrationen.med321.forEach(function (url) {
+      var s = document.createElement("script");
+      s.src = url;
+      document.body.appendChild(s);
+    });
+  }
+
+  /* ---- To-Top-Button (erscheint nach ~1 Bildschirmhoehe Scrolltiefe) ---
+     Rechts unten OBERHALB des 321-MED-Widgets positioniert (s. style.css). */
+  var toTop = document.createElement("button");
+  toTop.type = "button";
+  toTop.className = "to-top";
+  toTop.setAttribute("aria-label", "Nach oben");
+  toTop.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22">' +
+    '<path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" ' +
+    'stroke-linejoin="round" d="M5 14l7-7 7 7"/></svg>';
+  toTop.addEventListener("click", function () { window.scrollTo({ top: 0 }); });
+  document.body.appendChild(toTop);
+  var toTopTick = false;
+  window.addEventListener("scroll", function () {
+    if (toTopTick) { return; }
+    toTopTick = true;
+    requestAnimationFrame(function () {
+      toTop.classList.toggle("sichtbar", window.scrollY > window.innerHeight);
+      toTopTick = false;
+    });
+  }, { passive: true });
 
   /* ---- Mobile-Navigation (Header ist jetzt im DOM) -------------------- */
   var toggle = document.querySelector(".nav-toggle");

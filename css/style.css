@@ -14,8 +14,11 @@ body {
   font-family: var(--font-text);
   color: var(--farbe-text);
   background: var(--farbe-bg);
-  line-height: var(--zeilenhoehe);
-  font-size: var(--groesse-text);
+  /* --eh-*-Variablen kommen aus den Eingabehilfen (js/eingabehilfen.js);
+     ohne Widget-Eingriff gelten die Fallbacks = normale Token-Werte. */
+  line-height: calc(var(--zeilenhoehe) * var(--eh-zeile, 1));
+  font-size: calc(var(--groesse-text) * var(--eh-schrift, 1));
+  letter-spacing: var(--eh-abstand, normal);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -179,6 +182,101 @@ section { padding: var(--abschnitt-y) 0; }
   .main-nav ul { flex-direction: column; gap: 0; }
   .main-nav a { padding: .85rem var(--raum-2); border-bottom: 1px solid var(--farbe-rand); border-radius: 0; }
   .main-nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--farbe-primaer); }
+}
+
+/* =============================================================================
+   WIDGETS (Plan WIDGETS): Cookie-Consent, Google-Maps-Zwei-Klick,
+   Eingabehilfen, To-Top. Erzeugt von js/consent.js, js/eingabehilfen.js
+   und js/render.js — hier nur die Optik.
+   ========================================================================== */
+
+/* --- Cookie-Button (links unten, wie Altseite) --- */
+.cookie-button { position: fixed; left: var(--raum-4); bottom: var(--raum-4); z-index: 900; width: 56px; height: 56px; border-radius: 50%; border: none; background: var(--farbe-navy); color: var(--farbe-text-invers); display: grid; place-items: center; cursor: pointer; box-shadow: var(--schatten-stark); }
+.cookie-button:hover { background: var(--farbe-primaer); }
+
+/* --- Consent-Dialog --- */
+.consent-overlay { position: fixed; inset: 0; z-index: 100000; background: rgba(13, 23, 36, .55); display: grid; place-items: center; padding: var(--container-x); }
+.consent-overlay[hidden] { display: none; }   /* display:grid wuerde sonst das hidden-Attribut aushebeln */
+.consent-dialog { background: var(--farbe-bg); color: var(--farbe-text); max-width: 34rem; width: 100%; max-height: 90vh; overflow: auto; border-radius: var(--radius); padding: var(--raum-5) var(--raum-6); box-shadow: var(--schatten-stark); }
+.consent-kopf { display: flex; justify-content: space-between; align-items: center; gap: var(--raum-4); }
+.consent-kopf h2 { margin: 0; font-size: var(--groesse-h3); }
+.consent-schliessen { border: none; background: none; font-size: 1.1rem; cursor: pointer; color: var(--farbe-text-leise); padding: var(--raum-2); }
+.consent-schliessen:hover { color: var(--farbe-text); }
+.consent-dialog h3 { margin: var(--raum-4) 0 var(--raum-1); font-size: var(--groesse-h4); }
+.consent-text { color: var(--farbe-text-leise); font-size: var(--groesse-klein); }
+.consent-schalter { display: flex; gap: var(--raum-3); align-items: flex-start; font-size: var(--groesse-klein); }
+.consent-schalter input { width: 1.2rem; height: 1.2rem; margin-top: .15rem; accent-color: var(--farbe-primaer); flex-shrink: 0; }
+.consent-aktionen { display: flex; gap: var(--raum-3); flex-wrap: wrap; margin-top: var(--raum-5); }
+
+/* Leiser Zweit-Button (im Consent-Dialog) */
+.btn-leise { background: var(--farbe-bg-leise); border-color: var(--farbe-rand); color: var(--farbe-navy); }
+.btn-leise:hover { background: var(--farbe-rand); border-color: var(--farbe-rand); color: var(--farbe-navy); }
+
+/* --- Google-Maps-Zwei-Klick-Platzhalter (Karten auf Service & Kontakt) --- */
+.maps-embed { margin-top: var(--raum-4); border: 1px solid var(--farbe-rand); border-radius: var(--radius-s); background: var(--farbe-bg-leise); padding: var(--raum-5); text-align: center; }
+.maps-embed p { font-size: var(--groesse-klein); color: var(--farbe-text-leise); margin: 0 0 var(--raum-4); }
+.maps-embed.geladen { padding: 0; overflow: hidden; background: none; }
+.maps-embed iframe { display: block; width: 100%; height: 320px; border: 0; }
+
+/* --- To-Top-Button (rechts unten, OBERHALB des 321-MED-Widgets) --- */
+.to-top { position: fixed; right: var(--raum-4); bottom: 120px; z-index: 900; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--farbe-rand); background: var(--farbe-bg); color: var(--farbe-primaer); display: grid; place-items: center; cursor: pointer; box-shadow: var(--schatten); opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s ease; }
+.to-top.sichtbar { opacity: 1; visibility: visible; }
+.to-top:hover { background: var(--farbe-bg-leise); }
+
+/* --- Eingabehilfen: Button rechts oben (unterhalb des sticky Headers) --- */
+.eh-knopf { position: fixed; right: var(--raum-4); top: 96px; z-index: 950; width: 52px; height: 52px; border-radius: 50%; border: none; background: var(--farbe-primaer); color: var(--farbe-text-invers); display: grid; place-items: center; cursor: pointer; box-shadow: var(--schatten-stark); }
+.eh-knopf:hover { background: var(--farbe-primaer-dunkel); }
+
+/* --- Eingabehilfen: Panel (dunkel, wie Altseite) --- */
+.eh-panel { position: fixed; right: var(--raum-4); top: 160px; z-index: 950; width: 360px; max-width: calc(100vw - 2 * var(--raum-4)); max-height: calc(100vh - 180px); overflow: auto; background: var(--farbe-navy); color: var(--farbe-text-invers); border-radius: var(--radius); padding: var(--raum-5); box-shadow: var(--schatten-stark); }
+.eh-kopf { display: flex; align-items: center; gap: var(--raum-2); }
+.eh-kopf h2 { flex: 1; margin: 0; color: var(--farbe-text-invers); font-size: var(--groesse-h3); }
+.eh-reset, .eh-zu { background: none; border: 1px solid rgba(255, 255, 255, .35); color: inherit; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1rem; line-height: 1; }
+.eh-reset:hover, .eh-zu:hover { background: rgba(255, 255, 255, .15); }
+.eh-raster { display: grid; grid-template-columns: 1fr 1fr; gap: var(--raum-2); margin: var(--raum-4) 0; }
+.eh-schalter { background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .18); color: var(--farbe-text-invers); border-radius: var(--radius-s); padding: var(--raum-3) var(--raum-2); cursor: pointer; font-size: var(--groesse-klein); min-height: 3.2rem; font-family: var(--font-text); }
+.eh-schalter:hover { background: rgba(255, 255, 255, .18); }
+.eh-schalter.aktiv { background: var(--farbe-akzent); border-color: var(--farbe-akzent); color: #08312a; font-weight: var(--staerke-halbfett); }
+.eh-regler { display: flex; align-items: center; flex-wrap: wrap; gap: var(--raum-2); margin: var(--raum-3) 0; }
+.eh-regler-name { flex: 1 0 100%; font-size: var(--groesse-klein); }
+.eh-regler input[type="range"] { flex: 1; min-width: 0; accent-color: var(--farbe-akzent); }
+.eh-regler button { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .35); background: none; color: inherit; cursor: pointer; font-size: 1rem; line-height: 1; flex-shrink: 0; }
+.eh-regler button:hover { background: rgba(255, 255, 255, .15); }
+.eh-regler output { min-width: 3.2em; text-align: right; font-size: var(--groesse-klein); }
+
+/* --- Eingabehilfen: Wirkung der Schalter (Klassen auf <html>) --- */
+
+/* Links / Ueberschriften hervorheben */
+html.eh-links a:not(.eh-panel a) { background: var(--eh-marker-bg); color: var(--eh-marker-text); text-decoration: underline; }
+html.eh-titel :is(h1, h2, h3, h4, h5, h6):not(.eh-panel *):not(.consent-dialog *) { background: var(--eh-marker-bg); color: var(--eh-marker-text); padding-inline: .15em; }
+
+/* Vorlesen: anklickbare Absaetze markieren, aktueller Absatz umrandet */
+html.eh-vorlesen :is(p, h1, h2, h3, h4, h5, h6, li, td, th, figcaption, blockquote) { cursor: pointer; }
+.eh-liest { outline: 3px solid var(--farbe-akzent); outline-offset: 2px; }
+
+/* Lesemodus: Deko raus, eine Spalte, Lesebreite */
+html.eh-lesen .hero::before { background: var(--farbe-navy); }
+html.eh-lesen main img, html.eh-lesen .person-foto { display: none; }
+html.eh-lesen .karten { grid-template-columns: 1fr; }
+html.eh-lesen .karte, html.eh-lesen .news-item { box-shadow: none; }
+html.eh-lesen .karte:hover { transform: none; }
+html.eh-lesen .container { max-width: var(--breite-text); }
+html.eh-lesen .spalten { columns: 1; }
+html.eh-lesen .hero h1, html.eh-lesen .page-hero h1 { text-shadow: none; }
+
+/* Dunkler Kontrast: Stellen nachziehen, die feste Hell-Werte bzw. Navy nutzen
+   (--farbe-navy bleibt im Dunkel-Schema unveraendert, s. tokens.css) */
+html.eh-dunkel .site-header { background: rgba(13, 23, 36, .96); }
+html.eh-dunkel .main-nav { background: var(--farbe-bg); }
+html.eh-dunkel :is(h1, h2, h3, h4):not(.hero *):not(.page-hero *):not(.site-footer *) { color: var(--farbe-text); }
+html.eh-dunkel .main-nav a, html.eh-dunkel .nav-toggle { color: var(--farbe-text); }
+
+/* --- Widgets mobil --- */
+@media (max-width: 620px) {
+  .eh-knopf { top: 84px; right: var(--raum-2); }
+  .eh-panel { top: 90px; right: var(--raum-2); left: var(--raum-2); width: auto; max-height: calc(100vh - 110px); }
+  .cookie-button { left: var(--raum-2); bottom: var(--raum-2); width: 48px; height: 48px; }
+  .to-top { right: var(--raum-2); }
 }
 
 @media (prefers-reduced-motion: reduce) {

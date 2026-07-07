@@ -91,4 +91,43 @@
   --radius-pill:  999px;    /* Badges                                           */
   --schatten:        0 4px 18px rgba(13, 23, 36, 0.08);
   --schatten-stark:  0 10px 30px rgba(13, 23, 36, 0.14);
+
+  /* ===========================================================================
+     5. EINGABEHILFEN — Marker-Farben ("Links/Ueberschriften hervorheben")
+     ========================================================================= */
+  --eh-marker-bg:   #ffe14d;  /* gelbe Hervorhebung                             */
+  --eh-marker-text: #111111;  /* dunkler Text auf der Hervorhebung              */
+}
+
+/* =============================================================================
+   EINGABEHILFEN-FARBSCHEMATA — js/eingabehilfen.js setzt diese Klassen auf
+   <html>. Sie ueberschreiben NUR Token-Werte; die Regeln in style.css bleiben
+   unveraendert und uebernehmen die neuen Werte automatisch.
+   ========================================================================== */
+
+/* "Dunkler Kontrast": dunkles Schema, helle Schrift, hellere Linkfarben.
+   --farbe-navy bleibt bewusst unveraendert (Hero/Footer behalten ihren dunklen
+   Grund mit heller Schrift); Ueberschriften werden in style.css nachgezogen. */
+html.eh-dunkel {
+  --farbe-text:              #f2f6f9;
+  --farbe-text-leise:        #c3cfd8;
+  --farbe-bg:                #0d1724;
+  --farbe-bg-leise:          #13212f;
+  --farbe-rand:              #31465a;
+  --farbe-primaer:           #8fd0ee;
+  --farbe-primaer-dunkel:    #b5e0f4;
+  --farbe-primaer-hell:      #8fd0ee;
+}
+
+/* "Heller Kontrast": maximaler Hell-Kontrast (schwarz auf weiss). */
+html.eh-hell {
+  --farbe-text:              #000000;
+  --farbe-text-leise:        #1f1f1f;
+  --farbe-bg:                #ffffff;
+  --farbe-bg-leise:          #f2f2f2;
+  --farbe-rand:              #555555;
+  --farbe-navy:              #000000;
+  --farbe-primaer:           #003a5c;
+  --farbe-primaer-dunkel:    #002741;
+  --farbe-primaer-hell:      #003a5c;
 }
