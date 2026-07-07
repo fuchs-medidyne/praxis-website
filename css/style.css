@@ -20,7 +20,13 @@ body {
   font-size: calc(var(--groesse-text) * var(--eh-schrift, 1));
   letter-spacing: var(--eh-abstand, normal);
   -webkit-font-smoothing: antialiased;
+  /* Footer klebt am Seitenende, auch bei kurzen Seiten (z.B. Aktuelles) */
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
 }
+
+main { flex: 1 0 auto; }
 
 img { max-width: 100%; height: auto; display: block; }
 
@@ -77,9 +83,11 @@ p:last-child { margin-bottom: 0; }
 .hero p { font-size: var(--groesse-lead); margin: 0 auto var(--raum-5); max-width: 42rem; color: var(--farbe-text-invers-leise); }
 .hero-aktionen { display: flex; gap: var(--raum-3); flex-wrap: wrap; justify-content: center; }
 
-/* Schlichter Seiten-Kopf fuer Unterseiten (Petrol-Verlauf, ohne grosses Hero-Bild) */
-.page-hero { position: relative; color: var(--farbe-text-invers); padding: clamp(2.2rem, 5vw, 3.4rem) 0; background: linear-gradient(110deg, var(--farbe-primaer-dunkel), var(--farbe-primaer-hell)); }
-.page-hero .container { text-align: center; }
+/* Seiten-Kopf fuer Unterseiten: Petrol-Verlauf UEBER dem Hero-Bild (Struktur
+   statt Vollton) und FESTE, einheitliche Hoehe auf allen Seiten (Inhalt wird
+   vertikal zentriert — 1- und 3-zeilige Einleitungen ergeben dieselbe Hoehe). */
+.page-hero { position: relative; color: var(--farbe-text-invers); display: flex; align-items: center; min-height: var(--hoehe-page-hero); padding: var(--raum-5) 0; background: linear-gradient(110deg, rgba(10, 61, 80, .94) 0%, rgba(14, 83, 109, .88) 55%, rgba(20, 102, 162, .80) 100%), url("../bilder/hero-hausarzt-albstadt.jpg") center/cover no-repeat; }
+.page-hero .container { text-align: center; width: 100%; }
 .page-hero h1 { color: var(--farbe-text-invers); }
 .page-hero p { color: var(--farbe-text-invers-leise); font-size: var(--groesse-lead); margin: 0 auto; max-width: 46rem; }
 
@@ -95,6 +103,8 @@ p:last-child { margin-bottom: 0; }
 /* --- Abschnitte: EINHEITLICHER Innenabstand oben/unten --- */
 section { padding: var(--abschnitt-y) 0; }
 .section-leise { background: var(--farbe-bg-leise); }
+/* Sprungziele (#stellen, #bewerben ...) nicht unter den klebenden Header rutschen */
+section[id] { scroll-margin-top: 90px; }
 
 /* Zentrierter Abschnitts-Kopf (Ueberschrift + Einleitung ueber Kachelrastern) */
 .section-kopf { text-align: center; max-width: 52rem; margin: 0 auto var(--raum-6); }
@@ -102,6 +112,51 @@ section { padding: var(--abschnitt-y) 0; }
 
 /* Lese-Inhalte: angenehme Lesebreite, linksbuendig */
 .inhalt > p, .inhalt > ul, .inhalt > ol { max-width: var(--breite-text); }
+
+/* Zentrierter Einzel-Absatz (z.B. Notfall-Hinweis auf der Startseite) */
+.text-zentriert { text-align: center; margin-inline: auto; }
+
+/* --- Split-Layout: Text neben Bild (abwechselbar) --- */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--raum-6); align-items: center; }
+.split > * { min-width: 0; }
+/* Zwei Text-Spalten (z.B. Aufgaben / Anforderungen): oben ausrichten */
+.split--oben { align-items: start; }
+.split h2:first-child, .split h3:first-child, .inhalt .split h3 { margin-top: 0; }
+.split .spalten { columns: 1; }
+.split img { border-radius: var(--radius); box-shadow: var(--schatten); width: 100%; }
+/* Dezente Hover-Animation: Bild/Platzhalter wachsen leicht (nur nicht uebertreiben).
+   Transitions werden bei prefers-reduced-motion global deaktiviert. */
+.split img, .split .bild-platzhalter { transition: transform .25s ease, box-shadow .25s ease; }
+.split img:hover, .split .bild-platzhalter:hover { transform: scale(1.03); box-shadow: var(--schatten-stark); }
+/* Bild links statt rechts (nur ab Tablet — mobil bleibt Text zuerst) */
+@media (min-width: 761px) {
+  .split--bild-links > :last-child { order: -1; }
+}
+@media (max-width: 760px) {
+  .split { grid-template-columns: 1fr; gap: var(--raum-5); }
+}
+
+/* --- Bild-Platzhalter (bis echte Fotos vorliegen) ---
+   Tauschen: das <div class="bild-platzhalter" ...> ersetzen durch
+   <img src="bilder/NAME.jpg" alt="..."> — Styles (.split img / .karte-foto)
+   greifen automatisch. Der sichtbare <span>-Text sagt, welches Motiv fehlt. */
+.bild-platzhalter {
+  width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' fill-opacity='0.75' d='M9 3 7.2 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.2L15 3H9zm3 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z'/%3E%3C/svg%3E"),
+    linear-gradient(150deg, var(--farbe-primaer-hell), var(--farbe-primaer-dunkel));
+  background-repeat: no-repeat;
+  background-position: center 42%, center;
+  background-size: 64px 64px, cover;
+  display: flex; align-items: flex-end; justify-content: center;
+  box-shadow: var(--schatten);
+}
+.bild-platzhalter span { color: var(--farbe-text-invers-leise); font-size: var(--groesse-klein); padding: var(--raum-3); text-align: center; }
+.bild-platzhalter--breit { aspect-ratio: 21 / 9; border-radius: var(--radius-s); background-size: 48px 48px, cover; }
+
+/* Foto oben in Standort-Karten (Praxen-Seite) */
+.karte-foto { margin-bottom: var(--raum-4); }
+img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-radius: var(--radius-s); }
 
 .hinweis { border-left: 4px solid var(--farbe-akzent); background: var(--farbe-bg-leise); padding: var(--raum-4) var(--raum-5); border-radius: 0 var(--radius-s) var(--radius-s) 0; margin: 0 0 var(--block-abstand); }
 
@@ -165,6 +220,19 @@ section { padding: var(--abschnitt-y) 0; }
 .inhalt li { margin: var(--raum-1) 0; }
 .inhalt h3 { margin-top: var(--raum-6); color: var(--farbe-primaer-dunkel); }
 .inhalt h4 { margin: var(--raum-4) 0 var(--raum-1); color: var(--farbe-navy); }
+
+/* --- Karriere-Seite (Stellenangebote) --- */
+/* Bewerbungsablauf: nummerierte Schritte */
+.schritte { list-style: none; counter-reset: schritt; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--raum-5); padding: 0; margin: 0; }
+.schritte li { counter-increment: schritt; background: var(--farbe-bg); border: 1px solid var(--farbe-rand); border-radius: var(--radius); padding: var(--raum-5); box-shadow: var(--schatten); }
+.schritte li::before { content: counter(schritt); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--farbe-akzent); color: #08312a; font-family: var(--font-headline); font-weight: var(--staerke-fett); font-size: var(--groesse-h3); margin-bottom: var(--raum-3); }
+.schritte h3 { margin: 0 0 var(--raum-2); }
+.schritte p { margin: 0; color: var(--farbe-text-leise); }
+
+/* Stellen-Karten: Job-Titel + Eckdaten + CTA */
+.stelle-karte { display: flex; flex-direction: column; }
+.stelle-karte .btn { margin-top: auto; align-self: flex-start; }
+.stelle-karte p { color: var(--farbe-text-leise); }
 
 /* --- Fusszeile --- */
 .site-footer { background: var(--farbe-navy); color: #b9c6cf; margin-top: 0; padding: var(--raum-7) 0 var(--raum-5); }

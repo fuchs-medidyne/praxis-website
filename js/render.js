@@ -93,6 +93,13 @@
   // Status-Badge und Schliesszeiten; "kontakt" (Service-Seite) nur Kontaktdaten.
   function standortKarte(s, variant) {
     var h = '<article class="karte">\n';
+    // Foto der Niederlassung (nur Praxen-Seite). Platzhalter, bis ein Bild in
+    // site.js (standorte[].foto) hinterlegt ist.
+    if (variant === "voll") {
+      h += s.foto
+        ? '            <img class="karte-foto" src="' + s.foto + '" alt="Praxis ' + s.name + '">\n'
+        : '            <div class="karte-foto bild-platzhalter bild-platzhalter--breit" role="img" aria-label="Foto der Niederlassung folgt"><span>Bild folgt: Praxis ' + s.name + '</span></div>\n';
+    }
     h += '            <h3>Praxis ' + s.name + '</h3>\n';
     h += '            <ul class="kontakt-liste">\n';
     h += '              <li>' + s.strasse + ', ' + s.plz + ' ' + s.ort + '</li>\n';

@@ -57,6 +57,9 @@ window.PRAXIS = {
     {
       id: "ebingen",
       name: "Albstadt-Ebingen",
+      // foto: null -> Bild-Platzhalter wird angezeigt (Praxen-Seite). Sobald ein
+      // Foto vorliegt, hier den Pfad eintragen, z.B. "bilder/praxis-ebingen.jpg".
+      foto: null,
       strasse: "Europaplatz 3",
       plz: "72458",
       ort: "Albstadt",
@@ -77,6 +80,7 @@ window.PRAXIS = {
     {
       id: "tailfingen",
       name: "Albstadt-Tailfingen",
+      foto: null,   // Pfad eintragen, sobald ein Foto vorliegt (z.B. "bilder/praxis-tailfingen.jpg")
       strasse: "Adlerstraße 24",
       plz: "72461",
       ort: "Albstadt",
