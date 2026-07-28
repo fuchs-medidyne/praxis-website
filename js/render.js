@@ -180,6 +180,23 @@
     return hinweis + '<div class="karten">\n          ' + karten + '\n        </div>';
   }
 
+  // Praxisteam (MFAs, Verwaltung). Anders als bei den Aerzten liegen hier
+  // Hochformat-Aufnahmen (3:4) vor, deshalb Portraet-Kacheln statt runder
+  // Ausschnitte — das Foto fuellt die Kachelbreite, Name und Funktion stehen
+  // darunter. Fotos werden lazy geladen (14 Bilder auf einer Seite).
+  function praxisteam() {
+    if (!P.praxisteam || P.praxisteam.length === 0) { return ""; }
+    var karten = P.praxisteam.map(function (m) {
+      var fokus = m.fokus ? ' style="object-position:' + m.fokus + '"' : '';
+      var bild = m.foto
+        ? '<img src="' + m.foto + '"' + fokus + ' alt="' + attr(m.name) + '" loading="lazy">'
+        : '<div class="portraet-platzhalter" aria-hidden="true"></div>';
+      return '<article class="karte karte--portraet">' + bild +
+        '<div class="karte-text"><h3>' + m.name + '</h3><p>' + m.rolle + '</p></div></article>';
+    }).join("\n          ");
+    return '<div class="karten karten--portraet">\n          ' + karten + '\n        </div>';
+  }
+
   // News. variant "liste" (Aktuell-Seite) zeigt alle Eintraege bzw. einen
   // neutralen Hinweis; "teaser" (Startseite) zeigt nur den neuesten Eintrag.
   function news(variant) {
@@ -273,6 +290,8 @@
   });
   var teamEl = document.querySelector('[data-component="team"]');
   if (teamEl) { teamEl.outerHTML = team(); }
+  var praxisteamEl = document.querySelector('[data-component="praxisteam"]');
+  if (praxisteamEl) { praxisteamEl.outerHTML = praxisteam(); }
   document.querySelectorAll('[data-component="news"]').forEach(function (el) {
     el.outerHTML = news(el.getAttribute("data-variant") || "liste");
   });

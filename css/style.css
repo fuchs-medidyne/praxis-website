@@ -192,6 +192,41 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
   background-size: cover, 58px 58px;
 }
 
+/* --- Portraet-Kacheln (Praxisteam) ---
+   Die Teamfotos sind als Serie im Hochformat 3:4 entstanden (sitzend am
+   Arbeitsplatz). Ein runder Ausschnitt wie bei den Aerzten wuerde die Koepfe zu
+   klein machen, deshalb fuellt das Foto hier die Kachelbreite und Name/Funktion
+   stehen darunter. Karte, Rundung, Schatten und Hover bleiben identisch zu
+   .karte — die Seite bleibt EIN System. */
+.karten--portraet { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.karte--portraet { padding: 0; overflow: hidden; text-align: center; }
+.karte--portraet img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; }
+.karte--portraet .karte-text { padding: var(--raum-4); }
+.karte--portraet h3 { margin: 0 0 var(--raum-1); }
+.karte--portraet p { margin: 0; color: var(--farbe-text-leise); font-size: var(--groesse-klein); }
+/* Platzhalter, solange ein Foto fehlt — gleiche Silhouette wie .person-foto */
+.portraet-platzhalter {
+  width: 100%; aspect-ratio: 3 / 4;
+  background-image: linear-gradient(150deg, var(--farbe-primaer-hell), var(--farbe-primaer-dunkel)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' fill-opacity='0.82' d='M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 6v2h18v-2c0-3.5-4-6-9-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center, center 55%;
+  background-size: cover, 64px 64px;
+}
+/* Auf dem Handy immer zwei Spalten — eine einzige waere pro Person fast
+   bildschirmhoch und die Seite endlos lang. */
+@media (max-width: 560px) {
+  .karten--portraet { grid-template-columns: repeat(2, 1fr); gap: var(--raum-4); }
+  .karte--portraet .karte-text { padding: var(--raum-3); }
+}
+
+/* --- Gruppenbild (Team-Seite) ---
+   Bewusst in der Breite begrenzt: das Bild ist fast 4:3 und wuerde ueber die
+   volle Containerbreite den halben Bildschirm fuellen. */
+.gruppenbild { margin: 0 auto; max-width: 820px; }
+.gruppenbild img { width: 100%; height: auto; display: block; border-radius: var(--radius); box-shadow: var(--schatten); }
+.gruppenbild figcaption { margin-top: var(--raum-3); text-align: center; color: var(--farbe-text-leise); font-size: var(--groesse-klein); }
+
 /* News-/Aktuelles-Eintraege */
 .news-item { border: 1px solid var(--farbe-rand); border-left: 4px solid var(--farbe-akzent); border-radius: 0 var(--radius-s) var(--radius-s) 0; background: var(--farbe-bg); padding: var(--raum-5) var(--raum-5); margin: 0 0 var(--block-abstand); box-shadow: var(--schatten); }
 .news-item h2 { margin: var(--raum-1) 0 var(--raum-2); }
@@ -343,8 +378,12 @@ html.eh-vorlesen :is(p, h1, h2, h3, h4, h5, h6, li, td, th, figcaption, blockquo
 
 /* Lesemodus: Deko raus, eine Spalte, Lesebreite */
 html.eh-lesen .hero::before { background: var(--farbe-navy); }
-html.eh-lesen main img, html.eh-lesen .person-foto { display: none; }
+html.eh-lesen main img, html.eh-lesen .person-foto,
+html.eh-lesen .portraet-platzhalter, html.eh-lesen .gruppenbild { display: none; }
 html.eh-lesen .karten { grid-template-columns: 1fr; }
+/* Portraet-Kacheln verlieren im Lesemodus ihr Bild — Text braucht dann wieder
+   die normale Kachel-Polsterung. */
+html.eh-lesen .karte--portraet .karte-text { padding: var(--raum-5); }
 html.eh-lesen .karte, html.eh-lesen .news-item { box-shadow: none; }
 /* Im Lesemodus sind Bilder ausgeblendet — die Bildspalte muss dann weg,
    sonst bleibt eine leere Spalte neben dem Text stehen. */

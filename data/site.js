@@ -116,6 +116,33 @@ window.PRAXIS = {
     { name: "U. Schechtel",      rolle: "Primary Care Managerin (PCM)", foto: "bilder/team/schechtel.jpg" }
   ],
 
+  // Praxisteam (MFAs, Verwaltung, Auszubildende). Gleiche Felder wie oben, wird
+  // aber als Portraet-Kachel im Hochformat dargestellt — die Fotos sind als
+  // Serie in 3:4 entstanden, ein runder Ausschnitt wuerde die Koepfe zu klein
+  // machen. fokus (optional) verschiebt den Ausschnitt, z.B. "50% 30%".
+  //
+  // >>> NOCH ZU ERGAENZEN (Christian): Die Nachnamen stammen aus den
+  //     Dateinamen der Fotos, die Funktionen sind einheitliche Platzhalter.
+  //     Hier Vorname/Anrede und die tatsaechliche Funktion je Person eintragen
+  //     (z.B. "Ausbildung", "VERAH", "NaePA", "Labor", "Empfang", "Abrechnung").
+  //     Reihenfolge = Anzeigereihenfolge; aktuell alphabetisch.
+  praxisteam: [
+    { name: "Altinok",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/altinok.jpg" },
+    { name: "Bartsch",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/bartsch.jpg" },
+    { name: "Brütsch",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/bruetsch.jpg" },
+    { name: "Corigliano",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/corigliano.jpg" },
+    { name: "Di Valentino", rolle: "Medizinische Fachangestellte", foto: "bilder/team/di-valentino.jpg" },
+    { name: "Lebherz",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/lebherz.jpg" },
+    { name: "Papadopolou",  rolle: "Medizinische Fachangestellte", foto: "bilder/team/papadopolou.jpg" },
+    { name: "Potstavska",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/potstavska.jpg" },
+    { name: "Schillmann",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/schillmann.jpg" },
+    { name: "Stelzig",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/stelzig.jpg" },
+    { name: "Stiefel",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/stiefel.jpg" },
+    { name: "Uka",          rolle: "Medizinische Fachangestellte", foto: "bilder/team/uka.jpg" },
+    { name: "Warth",        rolle: "Verwaltung",                   foto: "bilder/team/warth.jpg" },
+    { name: "Yildiz",       rolle: "Medizinische Fachangestellte", foto: "bilder/team/yildiz.jpg" }
+  ],
+
   // Social-Media-Profile der Praxis. NUR verlinkt, nichts eingebettet — es wird
   // also kein Inhalt von Meta nachgeladen und es braucht keinen Consent-Schalter.
   // Facebook hat der Seite nie einen Kurznamen zugewiesen, deshalb die numerische
