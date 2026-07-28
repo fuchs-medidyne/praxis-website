@@ -121,26 +121,29 @@ window.PRAXIS = {
   // Serie in 3:4 entstanden, ein runder Ausschnitt wuerde die Koepfe zu klein
   // machen. fokus (optional) verschiebt den Ausschnitt, z.B. "50% 30%".
   //
+  // neueZeile: true -> die Kachel beginnt eine neue Rasterzeile. Damit steht die
+  // Verwaltung nicht zwischen den MFAs, sondern klar abgesetzt darunter.
+  //
   // >>> NOCH ZU ERGAENZEN (Christian): Die Nachnamen stammen aus den
   //     Dateinamen der Fotos, die Funktionen sind einheitliche Platzhalter.
-  //     Hier Vorname/Anrede und die tatsaechliche Funktion je Person eintragen
+  //     Hier Vornamen und die tatsaechliche Funktion je Person eintragen
   //     (z.B. "Ausbildung", "VERAH", "NaePA", "Labor", "Empfang", "Abrechnung").
-  //     Reihenfolge = Anzeigereihenfolge; aktuell alphabetisch.
+  //     Reihenfolge = Anzeigereihenfolge; aktuell alphabetisch, Verwaltung zuletzt.
   praxisteam: [
-    { name: "Altinok",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/altinok.jpg" },
-    { name: "Bartsch",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/bartsch.jpg" },
-    { name: "Brütsch",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/bruetsch.jpg" },
-    { name: "Corigliano",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/corigliano.jpg" },
-    { name: "Di Valentino", rolle: "Medizinische Fachangestellte", foto: "bilder/team/di-valentino.jpg" },
-    { name: "Lebherz",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/lebherz.jpg" },
-    { name: "Papadopolou",  rolle: "Medizinische Fachangestellte", foto: "bilder/team/papadopolou.jpg" },
-    { name: "Potstavska",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/potstavska.jpg" },
-    { name: "Schillmann",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/schillmann.jpg" },
-    { name: "Stelzig",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/stelzig.jpg" },
-    { name: "Stiefel",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/stiefel.jpg" },
-    { name: "Uka",          rolle: "Medizinische Fachangestellte", foto: "bilder/team/uka.jpg" },
-    { name: "Warth",        rolle: "Verwaltung",                   foto: "bilder/team/warth.jpg" },
-    { name: "Yildiz",       rolle: "Medizinische Fachangestellte", foto: "bilder/team/yildiz.jpg" }
+    { name: "Fr. Altinok",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/altinok.jpg" },
+    { name: "Fr. Bartsch",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/bartsch.jpg" },
+    { name: "Fr. Brütsch",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/bruetsch.jpg" },
+    { name: "Fr. Corigliano",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/corigliano.jpg" },
+    { name: "Fr. Di Valentino", rolle: "Medizinische Fachangestellte", foto: "bilder/team/di-valentino.jpg" },
+    { name: "Fr. Lebherz",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/lebherz.jpg" },
+    { name: "Fr. Papadopolou",  rolle: "Medizinische Fachangestellte", foto: "bilder/team/papadopolou.jpg" },
+    { name: "Fr. Potstavska",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/potstavska.jpg" },
+    { name: "Fr. Schillmann",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/schillmann.jpg" },
+    { name: "Fr. Stelzig",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/stelzig.jpg" },
+    { name: "Fr. Stiefel",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/stiefel.jpg" },
+    { name: "Fr. Uka",          rolle: "Medizinische Fachangestellte", foto: "bilder/team/uka.jpg" },
+    { name: "Fr. Yildiz",       rolle: "Medizinische Fachangestellte", foto: "bilder/team/yildiz.jpg" },
+    { name: "Hr. Warth",        rolle: "Verwaltung",                   foto: "bilder/team/warth.jpg", neueZeile: true }
   ],
 
   // Social-Media-Profile der Praxis. NUR verlinkt, nichts eingebettet — es wird

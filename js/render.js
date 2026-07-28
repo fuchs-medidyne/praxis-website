@@ -191,7 +191,8 @@
       var bild = m.foto
         ? '<img src="' + m.foto + '"' + fokus + ' alt="' + attr(m.name) + '" loading="lazy">'
         : '<div class="portraet-platzhalter" aria-hidden="true"></div>';
-      return '<article class="karte karte--portraet">' + bild +
+      var umbruch = m.neueZeile ? " karte--neue-zeile" : "";
+      return '<article class="karte karte--portraet' + umbruch + '">' + bild +
         '<div class="karte-text"><h3>' + m.name + '</h3><p>' + m.rolle + '</p></div></article>';
     }).join("\n          ");
     return '<div class="karten karten--portraet">\n          ' + karten + '\n        </div>';

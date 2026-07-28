@@ -204,6 +204,11 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
 .karte--portraet .karte-text { padding: var(--raum-4); }
 .karte--portraet h3 { margin: 0 0 var(--raum-1); }
 .karte--portraet p { margin: 0; color: var(--farbe-text-leise); font-size: var(--groesse-klein); }
+/* Beginnt eine neue Rasterzeile (site.js: neueZeile). Trennt Gruppen ab, ohne
+   das Raster zu verlassen — die Kachel behaelt exakt die Breite der uebrigen.
+   Der zusaetzliche Abstand macht sichtbar, dass der Umbruch gewollt ist. */
+.karte--neue-zeile { grid-column-start: 1; margin-top: var(--raum-4); }
+
 /* Platzhalter, solange ein Foto fehlt — gleiche Silhouette wie .person-foto */
 .portraet-platzhalter {
   width: 100%; aspect-ratio: 3 / 4;
