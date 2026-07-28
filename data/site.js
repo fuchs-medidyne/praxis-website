@@ -80,7 +80,7 @@ window.PRAXIS = {
     {
       id: "tailfingen",
       name: "Albstadt-Tailfingen",
-      foto: null,   // Pfad eintragen, sobald ein Foto vorliegt (z.B. "bilder/praxis-tailfingen.jpg")
+      foto: "bilder/praxis-tailfingen.jpg",
       strasse: "Adlerstraße 24",
       plz: "72461",
       ort: "Albstadt",
