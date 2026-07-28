@@ -126,8 +126,9 @@ window.PRAXIS = {
   //
   // >>> NOCH ZU ERGAENZEN (Christian): Die Nachnamen stammen aus den
   //     Dateinamen der Fotos, die Funktionen sind einheitliche Platzhalter.
-  //     Hier Vornamen und die tatsaechliche Funktion je Person eintragen
-  //     (z.B. "Ausbildung", "VERAH", "NaePA", "Labor", "Empfang", "Abrechnung").
+  //     Hier die tatsaechliche Funktion je Person eintragen (z.B. "Ausbildung",
+  //     "VERAH", "NaePA", "Labor", "Empfang", "Abrechnung").
+  //     Namen: bewusst NUR Anrede + Nachname, keine Vornamen (Christian 2026-07-28).
   //     Reihenfolge = Anzeigereihenfolge; aktuell alphabetisch, Verwaltung zuletzt.
   praxisteam: [
     { name: "Fr. Altinok",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/altinok.jpg" },
