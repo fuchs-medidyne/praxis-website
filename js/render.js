@@ -35,6 +35,12 @@
   // Datum "2026-07-01" -> "1. Juli 2026" (fuer News-Anzeige).
   var MONATE = ["Januar","Februar","März","April","Mai","Juni","Juli",
                 "August","September","Oktober","November","Dezember"];
+  // Entschaerft Text, der in einem HTML-Attribut landet (z. B. alt="...").
+  function attr(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
   function datumLang(iso) {
     var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
     if (!m) { return iso || ""; }
@@ -189,10 +195,22 @@
     }
     return P.news.map(function (n) {
       var link = n.link ? ' <a href="' + n.link + '">Mehr erfahren</a>' : '';
-      return '<article class="news-item">\n' +
-        '        <p class="news-datum">' + datumLang(n.datum) + '</p>\n' +
-        '        <h2>' + n.titel + '</h2>\n' +
-        '        <p>' + n.text + link + '</p>\n' +
+      var inhalt =
+        '<p class="news-datum">' + datumLang(n.datum) + '</p>\n' +
+        '          <h2>' + n.titel + '</h2>\n' +
+        '          <p>' + n.text + link + '</p>';
+      // Ohne Bild bleibt die Kachel wie bisher (einspaltig).
+      if (!n.bild) {
+        return '<article class="news-item">\n' +
+          '          ' + inhalt + '\n' +
+          '      </article>';
+      }
+      // Mit Bild: Bild links, Text rechts (auf dem Handy untereinander).
+      // bildAlt beschreibt das Bild fuer Screenreader — fehlt es, gilt das Bild
+      // als rein dekorativ (leeres alt) und wird uebersprungen.
+      return '<article class="news-item news-item--bild">\n' +
+        '        <img src="' + n.bild + '" alt="' + attr(n.bildAlt || "") + '" loading="lazy">\n' +
+        '        <div>\n          ' + inhalt + '\n        </div>\n' +
         '      </article>';
     }).join("\n      ");
   }

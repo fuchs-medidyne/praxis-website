@@ -128,14 +128,22 @@ window.PRAXIS = {
 
   // Aktuelles / News. Leeres Array -> "keine Mitteilungen" (Aktuell-Seite) und
   // kein Hinweis-Teaser auf der Startseite. Neuer Eintrag oben einfuegen:
-  //   { datum: "2026-07-01", titel: "...", text: "...", link: null }
+  //   { datum: "2026-07-01", titel: "...", text: "...", link: null,
+  //     bild: "bilder/news/DATEI.jpg", bildAlt: "Beschreibung fuers Vorlesen" }
   // datum im Format JJJJ-MM-TT (wird fuer die Anzeige aufbereitet).
   // Hinweis: "text" wird auch als Teaser auf der Startseite ausgegeben —
   // deshalb bewusst kurz halten (ein Absatz).
+  // bild/bildAlt sind optional: ohne bild bleibt die Kachel einspaltig wie bisher.
+  // Bilder nach bilder/news/ legen, benannt nach Datum + Thema, und vorher als
+  // JPG speichern (nicht als PNG aus dem Grafikprogramm — das ist um ein
+  // Vielfaches groesser und laedt auf dem Handy spuerbar langsamer).
   news: [
     {
       datum: "2026-07-28",
       titel: "Unsere neue Internetseite — und ab jetzt auch bei Facebook und Instagram",
+      bild: "bilder/news/2026-07-28-neue-website-instagram.jpg",
+      bildAlt: "Außenansicht des Hausarztcenter Albstadt am Europaplatz mit dem Hinweis " +
+               "„Wir sind jetzt auch auf Instagram“",
       text: "Unsere Internetseite ist neu: übersichtlicher, schneller und gut lesbar auch auf dem Handy — " +
             "mit Sprechzeiten, Behandlungsspektrum und Online-Terminvergabe für beide Praxen. " +
             "Neu ist außerdem: Sie finden uns jetzt auch bei " +

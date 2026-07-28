@@ -135,6 +135,9 @@ section[id] { scroll-margin-top: 90px; }
 @media (max-width: 760px) {
   .split { grid-template-columns: 1fr; gap: var(--raum-5); }
   .schritte { grid-template-columns: 1fr; }
+  /* Beitragsbild ueber den Text, in der Breite begrenzt statt bildschirmfuellend */
+  .news-item--bild { grid-template-columns: 1fr; gap: var(--raum-4); }
+  .news-item--bild img { max-width: 320px; }
 }
 
 /* --- Bild-Platzhalter (bis echte Fotos vorliegen) ---
@@ -192,6 +195,12 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
 /* News-/Aktuelles-Eintraege */
 .news-item { border: 1px solid var(--farbe-rand); border-left: 4px solid var(--farbe-akzent); border-radius: 0 var(--radius-s) var(--radius-s) 0; background: var(--farbe-bg); padding: var(--raum-5) var(--raum-5); margin: 0 0 var(--block-abstand); box-shadow: var(--schatten); }
 .news-item h2 { margin: var(--raum-1) 0 var(--raum-2); }
+/* Beitrag mit Bild: Bild links in fester Spalte, Text rechts. Die Spalte ist
+   bewusst schmal, damit hochformatige Social-Grafiken (4:5) die Kachel nicht
+   sprengen. */
+.news-item--bild { display: grid; grid-template-columns: minmax(0, 260px) 1fr; gap: var(--raum-5); align-items: start; }
+.news-item--bild > * { min-width: 0; }
+.news-item--bild img { width: 100%; height: auto; display: block; border-radius: var(--radius-s); }
 .news-datum { color: var(--farbe-text-leise); font-size: var(--groesse-klein); margin: 0 0 var(--raum-1); text-transform: uppercase; letter-spacing: .03em; }
 
 /* Platzhalter-Markierung (nur waehrend des Aufbaus) */
@@ -337,6 +346,9 @@ html.eh-lesen .hero::before { background: var(--farbe-navy); }
 html.eh-lesen main img, html.eh-lesen .person-foto { display: none; }
 html.eh-lesen .karten { grid-template-columns: 1fr; }
 html.eh-lesen .karte, html.eh-lesen .news-item { box-shadow: none; }
+/* Im Lesemodus sind Bilder ausgeblendet — die Bildspalte muss dann weg,
+   sonst bleibt eine leere Spalte neben dem Text stehen. */
+html.eh-lesen .news-item--bild { grid-template-columns: 1fr; }
 html.eh-lesen .karte:hover { transform: none; }
 html.eh-lesen .container { max-width: var(--breite-text); }
 html.eh-lesen .spalten { columns: 1; }
