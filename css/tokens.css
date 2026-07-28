@@ -34,6 +34,22 @@
   --farbe-text-invers:        #ffffff;  /* Text auf dunklem Grund               */
   --farbe-text-invers-leise:  #e9f1f4;  /* gedaempfter Text auf dunklem Grund   */
 
+  /* -- Schleier ueber den Hero-Bildern --
+     Liegt als Verlauf UEBER dem Foto, damit weisse Schrift lesbar bleibt.
+     Heller = Bildstruktur tritt staerker hervor, dunkler = mehr Kontrast.
+     Die Werte sind gemessen: mit dem aktuellen Hero-Bild bleibt der Kontrast
+     weisser Schrift bei ~6:1 und damit klar ueber der WCAG-AA-Schwelle (4.5).
+     Wer hier heller dreht, sollte den Kontrast neu pruefen.                   */
+  --hero-schleier: linear-gradient(110deg,
+                     rgba(12, 72, 95, .80) 0%,
+                     rgba(17, 95, 125, .64) 60%,
+                     rgba(24, 115, 180, .46) 100%);
+  /* Unterseiten-Koepfe: etwas dichter, da dort weniger Bildflaeche sichtbar ist */
+  --page-hero-schleier: linear-gradient(110deg,
+                     rgba(10, 61, 80, .94) 0%,
+                     rgba(14, 83, 109, .88) 55%,
+                     rgba(20, 102, 162, .80) 100%);
+
   /* ===========================================================================
      2. SCHRIFT
      ========================================================================= */
