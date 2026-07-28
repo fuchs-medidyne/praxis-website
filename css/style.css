@@ -170,6 +170,11 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
 .karte:hover { transform: translateY(-3px); box-shadow: var(--schatten-stark); }
 .karte h3 { margin-top: 0; color: var(--farbe-primaer-dunkel); }
 
+/* Karten nur so hoch wie ihr Inhalt (statt auf Zeilenhoehe gestreckt). Noetig,
+   sobald eine Karte in der Reihe deutlich mehr Text hat — sonst klafft in den
+   kurzen Karten eine grosse Leerflaeche ueber dem Button (s. .stelle-karte). */
+.karten--oben { align-items: start; }
+
 /* Ausrichtung: Teaser-/Navigationskacheln sind zentriert (kurz, symmetrisch);
    Daten-/Listenkarten bleiben linksbuendig (siehe .kontakt-liste/.zeiten). */
 .karten--teaser .karte { text-align: center; }
@@ -310,6 +315,12 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
 .stelle-karte { display: flex; flex-direction: column; }
 .stelle-karte .btn { margin-top: auto; align-self: flex-start; }
 .stelle-karte p { color: var(--farbe-text-leise); }
+/* Optionale Vorteils-Liste in einer Stellenkarte (z.B. Weiterbildungsstelle).
+   Kleiner gesetzt als der Fliesstext, damit der Stellentitel fuehrend bleibt;
+   der Button rutscht durch margin-top:auto weiterhin an den Kartenfuss, die
+   uebrigen Karten bleiben dadurch buendig. */
+.stelle-karte ul { margin: 0 0 var(--raum-5); padding-left: 1.1rem; color: var(--farbe-text-leise); font-size: var(--groesse-klein); }
+.stelle-karte li { margin: var(--raum-1) 0; }
 
 /* --- Fusszeile --- */
 .site-footer { background: var(--farbe-navy); color: #b9c6cf; margin-top: 0; padding: var(--raum-7) 0 var(--raum-5); }
