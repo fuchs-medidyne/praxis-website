@@ -225,6 +225,27 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
   .karte--portraet .karte-text { padding: var(--raum-3); }
 }
 
+/* --- Bilderband: lockere Schnappschuss-Reihe (Stellenangebote) ---
+   Drei Fotos nebeneinander im gleichen 4:3-Ausschnitt, ohne Kartenrahmen und
+   ohne eigene Ueberschrift — die Reihe soll beilaeufig wirken, nicht wie eine
+   Galerie. Der Ausschnitt entsteht ueber object-fit: cover, die Dateien
+   behalten ihr Originalformat; einzelne Bilder koennen ihn per
+   style="object-position: ..." verschieben (Hoch- und Querformat gemischt). */
+.bilderband { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--raum-4); margin-top: var(--block-abstand); }
+.bilderband img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
+  border-radius: var(--radius); box-shadow: var(--schatten);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.bilderband img:hover { transform: scale(1.03); box-shadow: var(--schatten-stark); }
+.bilderband-text { color: var(--farbe-text-leise); font-size: var(--groesse-klein); font-style: italic; margin: var(--raum-3) 0 0; }
+/* Handy: zwei Spalten. Bleibt das letzte Bild allein uebrig, laeuft es ueber
+   die volle Breite — dann aber flacher, damit es die Seite nicht sprengt. */
+@media (max-width: 700px) {
+  .bilderband { grid-template-columns: 1fr 1fr; gap: var(--raum-3); }
+  .bilderband img:last-child:nth-child(odd) { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+}
+
 /* --- Gruppenbild (Team-Seite) ---
    Bewusst in der Breite begrenzt: das Bild ist fast 4:3 und wuerde ueber die
    volle Containerbreite den halben Bildschirm fuellen. */
@@ -384,7 +405,8 @@ html.eh-vorlesen :is(p, h1, h2, h3, h4, h5, h6, li, td, th, figcaption, blockquo
 /* Lesemodus: Deko raus, eine Spalte, Lesebreite */
 html.eh-lesen .hero::before { background: var(--farbe-navy); }
 html.eh-lesen main img, html.eh-lesen .person-foto,
-html.eh-lesen .portraet-platzhalter, html.eh-lesen .gruppenbild { display: none; }
+html.eh-lesen .portraet-platzhalter, html.eh-lesen .gruppenbild,
+html.eh-lesen .bilderband, html.eh-lesen .bilderband-text { display: none; }
 html.eh-lesen .karten { grid-template-columns: 1fr; }
 /* Portraet-Kacheln verlieren im Lesemodus ihr Bild — Text braucht dann wieder
    die normale Kachel-Polsterung. */
