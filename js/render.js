@@ -245,16 +245,11 @@
 
   strukturdaten();
 
-  /* ---- 321 MED Online-Rezeption (Widget rechts unten, alle Seiten) ----
-     Laedt OHNE Consent-Gate (Entscheidung Christian 2026-07-07, Paritaet
-     zur Altseite). URLs zentral in data/site.js (integrationen.med321). */
-  if (P.integrationen && P.integrationen.med321) {
-    P.integrationen.med321.forEach(function (url) {
-      var s = document.createElement("script");
-      s.src = url;
-      document.body.appendChild(s);
-    });
-  }
+  /* ---- 321 MED Online-Rezeption ----
+     Wird NICHT mehr hier geladen: seit 2026-07-28 haengt das Widget hinter der
+     Einwilligung (Entscheidung Christian — § 25 Abs. 1 TDDDG). Das Laden macht
+     js/consent.js, sobald die Einwilligung vorliegt. URLs bleiben zentral in
+     data/site.js (integrationen.med321). */
 
   /* ---- To-Top-Button (erscheint nach ~1 Bildschirmhoehe Scrolltiefe) ---
      Rechts unten OBERHALB des 321-MED-Widgets positioniert (s. style.css). */

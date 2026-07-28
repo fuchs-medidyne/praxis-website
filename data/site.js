@@ -25,8 +25,8 @@ window.PRAXIS = {
 
   // Externe Einbindungen. med321 = Online-Rezeption (321 MED GmbH); der Pfad
   // enthaelt den Praxis-Account-Key (aus der Altseite uebernommen). Beide
-  // Scripts werden von js/render.js auf jeder Seite geladen (ohne Consent-
-  // Gate — Entscheidung Christian 2026-07-07, Paritaet zur Altseite).
+  // Scripts laedt js/consent.js — erst NACH Einwilligung (Entscheidung
+  // Christian 2026-07-28; vorher ohne Gate, s. § 25 Abs. 1 TDDDG).
   integrationen: {
     med321: [
       "https://321med7.com/cdn/server/921f15363c0fd134cbcd3e3f91e173b1021d8c2d/321med.js",
