@@ -59,7 +59,7 @@ window.PRAXIS = {
       name: "Albstadt-Ebingen",
       // foto: null -> Bild-Platzhalter wird angezeigt (Praxen-Seite). Sobald ein
       // Foto vorliegt, hier den Pfad eintragen, z.B. "bilder/praxis-ebingen.jpg".
-      foto: null,
+      foto: "bilder/praxis-ebingen.jpg",
       strasse: "Europaplatz 3",
       plz: "72458",
       ort: "Albstadt",
@@ -103,15 +103,17 @@ window.PRAXIS = {
   // Team. foto: null -> Platzhalter wird angezeigt; sobald ein Foto vorliegt,
   // hier den Pfad eintragen (z.B. "bilder/team/diebold.jpg") — der Platzhalter
   // und der "Fotos folgen"-Hinweis verschwinden dann automatisch.
+  // fokus (optional): steuert den runden Bildausschnitt, wenn "mittig" den Kopf
+  // abschneidet — z.B. "top" (Kopf oben halten) oder "50% 20%". Weglassen = mittig.
   team: [
-    { name: "Dr. Diebold",       rolle: "Facharzt für Innere- und Allgemeinmedizin · Facharzt für Anästhesie · Notfallmedizin", foto: null },
-    { name: "Dr. Fuchs",         rolle: "Facharzt für Allgemeinmedizin · Notfallmedizin", foto: null },
-    { name: "R. Prager",         rolle: "Fachärztin für Innere Medizin", foto: null },
-    { name: "Dr. Muschelknautz", rolle: "Facharzt für Allgemeinmedizin", foto: null },
-    { name: "B. Butz",           rolle: "Facharzt für Visceralchirurgie / Allgemeinmedizin (in Weiterbildung)", foto: null },
-    { name: "R. Petrescu",       rolle: "Allgemeinmedizin (in Weiterbildung)", foto: null },
-    { name: "Dr. Friz",          rolle: "Allgemeinmedizin (in Weiterbildung)", foto: null },
-    { name: "U. Schechtel",      rolle: "Primary Care Managerin (PCM)", foto: null }
+    { name: "Dr. Diebold",       rolle: "Facharzt für Innere- und Allgemeinmedizin · Facharzt für Anästhesie · Notfallmedizin", foto: "bilder/team/diebold.jpg" },
+    { name: "Dr. Fuchs",         rolle: "Facharzt für Allgemeinmedizin · Notfallmedizin", foto: "bilder/team/fuchs.jpg", fokus: "50% 35%" },
+    { name: "R. Prager",         rolle: "Fachärztin für Innere Medizin", foto: "bilder/team/prager.jpg" },
+    { name: "Dr. Muschelknautz", rolle: "Facharzt für Allgemeinmedizin", foto: "bilder/team/muschelknautz.jpg" },
+    { name: "B. Butz",           rolle: "Facharzt für Allgemeinmedizin · Facharzt für Visceralchirurgie", foto: "bilder/team/butz.jpg" },
+    { name: "R. Petrescu",       rolle: "Allgemeinmedizin (in Weiterbildung)", foto: "bilder/team/petrescu.jpg", fokus: "top" },
+    { name: "Dr. Friz",          rolle: "Allgemeinmedizin (in Weiterbildung)", foto: "bilder/team/friz.jpg" },
+    { name: "U. Schechtel",      rolle: "Primary Care Managerin (PCM)", foto: "bilder/team/schechtel.jpg" }
   ],
 
   // Aktuelles / News. Leeres Array -> "keine Mitteilungen" (Aktuell-Seite) und

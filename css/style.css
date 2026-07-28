@@ -134,6 +134,7 @@ section[id] { scroll-margin-top: 90px; }
 }
 @media (max-width: 760px) {
   .split { grid-template-columns: 1fr; gap: var(--raum-5); }
+  .schritte { grid-template-columns: 1fr; }
 }
 
 /* --- Bild-Platzhalter (bis echte Fotos vorliegen) ---
@@ -223,11 +224,17 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
 
 /* --- Karriere-Seite (Stellenangebote) --- */
 /* Bewerbungsablauf: nummerierte Schritte */
-.schritte { list-style: none; counter-reset: schritt; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--raum-5); padding: 0; margin: 0; }
-.schritte li { counter-increment: schritt; background: var(--farbe-bg); border: 1px solid var(--farbe-rand); border-radius: var(--radius); padding: var(--raum-5); box-shadow: var(--schatten); }
-.schritte li::before { content: counter(schritt); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--farbe-akzent); color: #08312a; font-family: var(--font-headline); font-weight: var(--staerke-fett); font-size: var(--groesse-h3); margin-bottom: var(--raum-3); }
+/* .inhalt > ol deckelt sonst auf Lesetext-Breite (hoehere Spezifitaet) — hier aufheben. */
+.inhalt > .schritte { max-width: none; }
+.schritte { list-style: none; counter-reset: schritt; display: grid; grid-template-columns: repeat(3, minmax(0, 260px)); justify-content: center; gap: var(--raum-5); padding: 0; margin: 0; }
+.schritte li { counter-increment: schritt; background: var(--farbe-bg); border: 1px solid var(--farbe-rand); border-radius: var(--radius); padding: var(--raum-5); box-shadow: var(--schatten); text-align: center; }
+.schritte li::before { content: counter(schritt); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--farbe-akzent); color: #08312a; font-family: var(--font-headline); font-weight: var(--staerke-fett); font-size: var(--groesse-h3); margin: 0 auto var(--raum-3); }
 .schritte h3 { margin: 0 0 var(--raum-2); }
 .schritte p { margin: 0; color: var(--farbe-text-leise); }
+/* Abschluss-Schritt: eigene, volle Zeile — prominenter als die drei davor. */
+.schritte .schritt-final { grid-column: 1 / -1; background: var(--farbe-primaer); border-color: var(--farbe-primaer); color: var(--farbe-text-invers); padding: var(--raum-6) var(--raum-5); box-shadow: var(--schatten-stark); }
+.schritte .schritt-final h3 { color: var(--farbe-text-invers); font-size: var(--groesse-h2); }
+.schritte .schritt-final p { color: var(--farbe-text-invers-leise); }
 
 /* Stellen-Karten: Job-Titel + Eckdaten + CTA */
 .stelle-karte { display: flex; flex-direction: column; }

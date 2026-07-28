@@ -143,8 +143,9 @@
       ? '<p class="hinweis">Die Team-Fotos werden derzeit erstellt und folgen in Kürze.</p>\n      '
       : '';
     var karten = P.team.map(function (m) {
+      var fokus = m.fokus ? ' style="object-position:' + m.fokus + '"' : '';
       var foto = m.foto
-        ? '<div class="person-foto"><img src="' + m.foto + '" alt="' + m.name + '"></div>'
+        ? '<div class="person-foto"><img src="' + m.foto + '"' + fokus + ' alt="' + m.name + '"></div>'
         : '<div class="person-foto person-foto--platzhalter" aria-hidden="true"></div>';
       return '<article class="karte karte--person">' + foto +
         '<h3>' + m.name + '</h3><p>' + m.rolle + '</p></article>';
