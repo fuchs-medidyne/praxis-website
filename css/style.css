@@ -246,6 +246,9 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
 .site-footer a { color: var(--farbe-text-invers); }
 .footer-grid { display: grid; gap: var(--raum-6); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 .site-footer h3 { color: var(--farbe-text-invers); font-size: 1.05rem; margin: 0 0 var(--raum-3); }
+.footer-social { display: flex; gap: var(--raum-2); margin-top: var(--raum-4); }
+.footer-social a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--radius-pill); background: rgba(255,255,255,.10); transition: background .15s ease; }
+.footer-social a:hover, .footer-social a:focus-visible { background: rgba(255,255,255,.22); }
 .footer-bottom { margin-top: var(--raum-6); padding-top: var(--raum-4); border-top: 1px solid rgba(255,255,255,.14); font-size: var(--groesse-klein); display: flex; gap: var(--raum-4); flex-wrap: wrap; justify-content: space-between; align-items: center; }
 .footer-bottom nav a { margin-right: var(--raum-4); }
 

@@ -67,6 +67,27 @@
         '          <p>' + s.strasse + ', ' + s.plz + ' ' + s.ort + '<br>Tel. <a href="tel:' + s.telLink + '">' + s.tel + '</a></p>\n' +
         '        </div>';
     }).join("\n        ");
+    // Social-Media-Icons (nur Links, kein eingebetteter Meta-Inhalt -> kein
+    // Consent noetig). Erscheinen nur, wenn in site.js eine URL hinterlegt ist.
+    var SOCIAL_ICONS = {
+      facebook: { titel: "Facebook", pfad: "M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5H16.7V4.6c-.3-.04-1.3-.13-2.45-.13-2.42 0-4.08 1.48-4.08 4.2v2.34H7.46V14h2.71v8z" },
+      instagram: { titel: "Instagram", pfad: "M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2m0 5.13A4.67 4.67 0 1 0 16.67 12 4.67 4.67 0 0 0 12 7.33m0 7.7A3.03 3.03 0 1 1 15.03 12 3.03 3.03 0 0 1 12 15.03m5.95-7.88a1.09 1.09 0 1 1-1.09-1.09 1.09 1.09 0 0 1 1.09 1.09" }
+    };
+    var social = "";
+    if (P.social) {
+      var icons = Object.keys(SOCIAL_ICONS).filter(function (k) { return P.social[k]; })
+        .map(function (k) {
+          var i = SOCIAL_ICONS[k];
+          return '<a href="' + P.social[k] + '" target="_blank" rel="noopener"' +
+            ' aria-label="' + i.titel + '" title="' + i.titel + '">' +
+            '<svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22">' +
+            '<path fill="currentColor" d="' + i.pfad + '"/></svg></a>';
+        });
+      if (icons.length) {
+        social = '\n          <p class="footer-social">' + icons.join("\n            ") + '</p>';
+      }
+    }
+
     var rechts = P.rechtsLinks.map(function (l) {
       return '<a href="' + l.href + '">' + l.text + '</a>';
     }).join("\n          ") +
@@ -77,7 +98,7 @@
       '      <div class="footer-grid">\n' +
       '        <div>\n' +
       '          <h3>' + P.name + '</h3>\n' +
-      '          <p>' + P.rechtsform + '<br>' + P.gesellschafter.join(" · ") + '</p>\n' +
+      '          <p>' + P.rechtsform + '<br>' + P.gesellschafter.join(" · ") + '</p>' + social + '\n' +
       '        </div>\n' +
       '        ' + standortSpalten + '\n' +
       '      </div>\n' +

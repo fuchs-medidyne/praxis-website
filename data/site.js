@@ -116,9 +116,34 @@ window.PRAXIS = {
     { name: "U. Schechtel",      rolle: "Primary Care Managerin (PCM)", foto: "bilder/team/schechtel.jpg" }
   ],
 
+  // Social-Media-Profile der Praxis. NUR verlinkt, nichts eingebettet — es wird
+  // also kein Inhalt von Meta nachgeladen und es braucht keinen Consent-Schalter.
+  // Facebook hat der Seite nie einen Kurznamen zugewiesen, deshalb die numerische
+  // Seiten-ID; sobald in den Facebook-Seiteneinstellungen ein Benutzername
+  // vergeben ist, kann hier die schoenere Adresse rein.
+  social: {
+    facebook: "https://www.facebook.com/100091815146101/",
+    instagram: "https://www.instagram.com/hausarztcenter_albstadt/"
+  },
+
   // Aktuelles / News. Leeres Array -> "keine Mitteilungen" (Aktuell-Seite) und
   // kein Hinweis-Teaser auf der Startseite. Neuer Eintrag oben einfuegen:
   //   { datum: "2026-07-01", titel: "...", text: "...", link: null }
   // datum im Format JJJJ-MM-TT (wird fuer die Anzeige aufbereitet).
-  news: []
+  // Hinweis: "text" wird auch als Teaser auf der Startseite ausgegeben —
+  // deshalb bewusst kurz halten (ein Absatz).
+  news: [
+    {
+      datum: "2026-07-28",
+      titel: "Unsere neue Internetseite — und ab jetzt auch bei Facebook und Instagram",
+      text: "Unsere Internetseite ist neu: übersichtlicher, schneller und gut lesbar auch auf dem Handy — " +
+            "mit Sprechzeiten, Behandlungsspektrum und Online-Terminvergabe für beide Praxen. " +
+            "Neu ist außerdem: Sie finden uns jetzt auch bei " +
+            "<a href=\"https://www.facebook.com/100091815146101/\" target=\"_blank\" rel=\"noopener\">Facebook</a> und " +
+            "<a href=\"https://www.instagram.com/hausarztcenter_albstadt/\" target=\"_blank\" rel=\"noopener\">Instagram</a>. " +
+            "Dort informieren wir Sie künftig kurzfristig über geänderte Sprechzeiten, Vertretungen und " +
+            "Neuigkeiten aus der Praxis.",
+      link: null
+    }
+  ]
 };
