@@ -157,15 +157,31 @@
   }
 
   function entscheiden(googleMaps, med321) {
-    // Fremde Scripte lassen sich nicht wieder entladen: wurde 321 MED in dieser
-    // Ansicht bereits geladen und jetzt widerrufen, hilft nur ein Neuladen.
-    var neuLadenNoetig = med321Geladen && !med321;
+    // Jede Aenderung am 321-MED-Zustand braucht ein Neuladen der Seite:
+    //
+    // - Widerruf: fremde Scripte lassen sich nicht wieder entladen.
+    // - Erteilung: das 321-MED-Script baut sein Widget auf, wenn die Seite
+    //   fertig geladen ist. Haengen wir es erst beim Klick auf "Akzeptieren"
+    //   an, ist dieser Moment vorbei — das Script laedt, baut aber nichts mehr.
+    //   Ohne Neuladen sieht der Besucher nach dem Zustimmen also NICHTS und
+    //   muesste von selbst auf Aktualisieren druecken. Genau das ist Patienten
+    //   aufgefallen. Wir koennen den Aufbau nicht selbst anstossen (fremder
+    //   Code, keine oeffentliche Schnittstelle) — bleibt das Neuladen.
+    //
+    // Google Maps braucht das nicht: die Embeds setzen wir selbst ein.
+    var warGeladen = med321Geladen;
+    var zustandGeaendert = warGeladen !== !!med321;
+
     schreiben(googleMaps, med321);
     embedsAnwenden(googleMaps);
     med321HinweisAnwenden(med321);
-    if (med321) { med321Laden(); }
     dialogSchliessen();
-    if (neuLadenNoetig) { location.reload(); }
+
+    // Nur neu laden, wenn die Einwilligung auch wirklich gespeichert wurde.
+    // Ist localStorage gesperrt (privater Modus), waere sie nach dem Neuladen
+    // wieder weg, der Dialog kaeme erneut — der Besucher liefe im Kreis.
+    if (zustandGeaendert && lesen()) { location.reload(); return; }
+    if (med321) { med321Laden(); }
   }
 
   function verdrahten() {
