@@ -134,11 +134,12 @@ section[id] { scroll-margin-top: 90px; }
 }
 @media (max-width: 760px) {
   .split { grid-template-columns: 1fr; gap: var(--raum-5); }
-  .schritte { grid-template-columns: 1fr; }
-  /* Beitragsbild ueber den Text, in der Breite begrenzt statt bildschirmfuellend */
-  .news-item--bild { grid-template-columns: 1fr; gap: var(--raum-4); }
-  .news-item--bild img { max-width: 320px; }
 }
+/* ACHTUNG bei weiteren Mobil-Regeln: Media Queries erhoehen die Spezifitaet
+   NICHT. Steht die Basis-Regel spaeter in dieser Datei, gewinnt sie — auch auf
+   dem Handy. Mobil-Regeln deshalb IMMER hinter die zugehoerige Basis-Regel
+   setzen, nicht in diesen Block hier oben. (.schritte und .news-item--bild
+   standen hier und waren dadurch monatelang wirkungslos.) */
 
 /* --- Bild-Platzhalter (bis echte Fotos vorliegen) ---
    Tauschen: das <div class="bild-platzhalter" ...> ersetzen durch
@@ -274,6 +275,12 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
 .news-item--bild > * { min-width: 0; }
 .news-item--bild img { width: 100%; height: auto; display: block; border-radius: var(--radius-s); }
 .news-datum { color: var(--farbe-text-leise); font-size: var(--groesse-klein); margin: 0 0 var(--raum-1); text-transform: uppercase; letter-spacing: .03em; }
+/* Handy: Bild ueber den Text statt daneben, in der Breite begrenzt statt
+   bildschirmfuellend. Muss HINTER den Basis-Regeln stehen, sonst wirkungslos. */
+@media (max-width: 760px) {
+  .news-item--bild { grid-template-columns: 1fr; gap: var(--raum-4); }
+  .news-item--bild img { max-width: 320px; }
+}
 
 /* Platzhalter-Markierung (nur waehrend des Aufbaus) */
 .platzhalter { color: var(--farbe-text-leise); font-style: italic; }
@@ -316,6 +323,12 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
 .schritte .schritt-final { grid-column: 1 / -1; background: var(--farbe-primaer); border-color: var(--farbe-primaer); color: var(--farbe-text-invers); padding: var(--raum-6) var(--raum-5); box-shadow: var(--schatten-stark); }
 .schritte .schritt-final h3 { color: var(--farbe-text-invers); font-size: var(--groesse-h2); }
 .schritte .schritt-final p { color: var(--farbe-text-invers-leise); }
+/* Handy: die drei Schritte untereinander. Drei Spalten a mind. 260px ergeben
+   sonst ueber 800px Breite und schieben die ganze Seite seitlich raus.
+   Muss HINTER den Basis-Regeln stehen, sonst wirkungslos. */
+@media (max-width: 760px) {
+  .schritte { grid-template-columns: 1fr; }
+}
 
 /* Stellen-Karten: Job-Titel + Eckdaten + CTA */
 .stelle-karte { display: flex; flex-direction: column; }
