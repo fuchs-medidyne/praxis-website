@@ -138,7 +138,7 @@ window.PRAXIS = {
     { name: "Fr. Di Valentino", rolle: "Medizinische Fachangestellte", foto: "bilder/team/di-valentino.jpg" },
     { name: "Fr. Lebherz",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/lebherz.jpg" },
     { name: "Fr. Papadopolou",  rolle: "Medizinische Fachangestellte", foto: "bilder/team/papadopolou.jpg" },
-    { name: "Fr. Potstavska",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/potstavska.jpg" },
+    { name: "Fr. Podstavska",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/podstavska.jpg" },
     { name: "Fr. Schillmann",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/schillmann.jpg" },
     { name: "Fr. Stelzig",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/stelzig.jpg" },
     { name: "Fr. Stiefel",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/stiefel.jpg" },
