@@ -66,6 +66,17 @@
     });
   }
 
+  /* ---- Hinweis, solange die Einwilligung fuer 321 MED fehlt ------------ */
+
+  // Der Seitentext verweist an mehreren Stellen auf die Online-Rezeption
+  // (Startseite, Service & Kontakt). Ohne Einwilligung gibt es den Button dazu
+  // aber gar nicht — der Hinweis zeigt dann, wie man sie aktiviert. Sichtbar
+  // gemacht wird er ueber diese Klasse in style.css; fehlt sie (z.B. weil JS
+  // aus ist), bleibt der Hinweis unsichtbar.
+  function med321HinweisAnwenden(erlaubt) {
+    document.documentElement.classList.toggle("consent-med321-aus", !erlaubt);
+  }
+
   /* ---- Zwei-Klick-Embeds (Google Maps) -------------------------------- */
 
   function embedsAnwenden(erlaubt) {
@@ -115,7 +126,7 @@
       '  <label class="consent-schalter">\n' +
       '    <input type="checkbox" id="consent-med321">\n' +
       '    <span>Online-Rezeption 321&nbsp;MED — beim Laden werden Daten an die 321&nbsp;MED GmbH\n' +
-      '      übertragen. Ohne Einwilligung erreichen Sie uns weiterhin telefonisch, per E-Mail\n' +
+      '      übertragen. Ohne Einwilligung erreichen Sie uns weiterhin telefonisch, per Fax\n' +
       '      und über die Online-Terminvergabe.</span>\n' +
       '  </label>\n' +
       '  <div class="consent-aktionen">\n' +
@@ -151,6 +162,7 @@
     var neuLadenNoetig = med321Geladen && !med321;
     schreiben(googleMaps, med321);
     embedsAnwenden(googleMaps);
+    med321HinweisAnwenden(med321);
     if (med321) { med321Laden(); }
     dialogSchliessen();
     if (neuLadenNoetig) { location.reload(); }
@@ -215,6 +227,7 @@
 
   var consent = lesen();
   embedsAnwenden(!!(consent && consent.googleMaps));
+  med321HinweisAnwenden(!!(consent && consent.med321));
   if (consent && consent.med321) { med321Laden(); }
   if (!consent) { dialogOeffnen(); }   // Erstbesuch (oder neue Kategorie): Dialog zeigen
 })();

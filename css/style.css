@@ -164,6 +164,12 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
 
 .hinweis { border-left: 4px solid var(--farbe-akzent); background: var(--farbe-bg-leise); padding: var(--raum-4) var(--raum-5); border-radius: 0 var(--radius-s) var(--radius-s) 0; margin: 0 0 var(--block-abstand); }
 
+/* Hinweis an den Stellen, die auf die Online-Rezeption verweisen: sichtbar nur,
+   solange die Einwilligung dafuer fehlt (consent.js setzt die Klasse auf <html>).
+   Ohne die Klasse — auch ohne JavaScript — bleibt er ausgeblendet. */
+.med321-hinweis { display: none; }
+.consent-med321-aus .med321-hinweis { display: block; }
+
 /* --- Karten-Raster --- */
 .karten { display: grid; gap: var(--raum-5); grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
 .karte { border: 1px solid var(--farbe-rand); border-radius: var(--radius); padding: var(--raum-5); background: var(--farbe-bg); box-shadow: var(--schatten); transition: transform .12s ease, box-shadow .12s ease; }
