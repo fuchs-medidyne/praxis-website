@@ -39,6 +39,20 @@ img { max-width: 100%; height: auto; display: block; }
    NICHT beeinflussen: display:contents nimmt es aus dem Box-Baum, sodass das <img>
    selbst das Grid-/Flex-Kind bleibt — sonst braeche z. B. .split und .bilderband. */
 picture { display: contents; }
+/* Das <source> MUSS ausgeblendet werden. Durch display:contents am <picture>
+   ruecken dessen Kinder ins Raster des Containers — und dazu zaehlt auch das
+   <source>. Es belegte dadurch eine eigene Rasterzelle, sodass aus zwei Spalten
+   drei Zellen wurden und das Bild in die naechste Zeile UNTER den Text rutschte.
+   Genau dieses Fehlerbild trat am 2026-08-16 auf allen Split-Seiten auf. */
+picture > source { display: none; }
+/* WICHTIG: Durch display:contents ist das <img> das echte Grid-/Flex-Kind, im DOM
+   steht als direktes Kind aber das <picture>. Container-Regeln der Form
+   ".split > * { min-width: 0 }" treffen deshalb nur das <picture> und laufen dort
+   ins Leere (kein Box-Modell). Ohne min-width:0 nimmt ein Grid-Item als Mindest-
+   breite seine Inhaltsbreite an — beim Bild also 1600 px. Genau das hat am
+   2026-08-16 die Splits, den Aktuell-Beitrag und das Bilderband zerlegt.
+   Deshalb die Regel hier direkt am Bild. */
+picture > img { min-width: 0; }
 
 a { color: var(--farbe-primaer); text-underline-offset: 2px; }
 a:hover { color: var(--farbe-primaer-dunkel); }
@@ -164,7 +178,12 @@ section[id] { scroll-margin-top: 90px; }
 .split img:hover, .split .bild-platzhalter:hover { transform: scale(1.03); box-shadow: var(--schatten-stark); }
 /* Bild links statt rechts (nur ab Tablet — mobil bleibt Text zuerst) */
 @media (min-width: 761px) {
-  .split--bild-links > :last-child { order: -1; }
+  /* Zweite Zeile wegen des <picture>-Wrappers: Das Raster-Kind ist durch
+     display:contents das <img>, im DOM steht als letztes Kind aber das <picture>.
+     `order` auf dem <picture> bliebe wirkungslos (erzeugt keine Box), das Bild
+     stuende dann immer rechts und die Abwechslung waere weg. */
+  .split--bild-links > :last-child,
+  .split--bild-links > picture:last-child > img { order: -1; }
 }
 @media (max-width: 760px) {
   .split { grid-template-columns: 1fr; gap: var(--raum-5); }
