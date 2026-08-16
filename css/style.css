@@ -64,7 +64,13 @@ p:last-child { margin-bottom: 0; }
 
 /* --- Kopfzeile / Navigation --- */
 .site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--farbe-rand); }
-.site-header .container { display: flex; align-items: center; justify-content: space-between; min-height: 74px; gap: var(--raum-4); }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; min-height: var(--hoehe-header); gap: var(--raum-4); }
+/* Platz fuer den Header reservieren, SOLANGE der Platzhalter noch leer ist. render.js
+   ersetzt <div data-component="site-header"> erst nach dem Laden — ohne diese Regel
+   rutscht der gesamte Inhalt beim Einsetzen nach unten (gemessen: CLS 0,091 mobil,
+   sichtbar geworden, nachdem die Seite durch das Vorladen frueher rendert).
+   +1px fuer den unteren Rahmen der .site-header. */
+[data-component="site-header"]:empty { display: block; min-height: calc(var(--hoehe-header) + 1px); }
 .logo { display: inline-flex; align-items: center; text-decoration: none; }
 .logo img { height: 44px; width: auto; }
 

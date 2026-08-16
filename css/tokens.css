@@ -93,6 +93,10 @@
   /* -- Abgeleitete, benannte Abstaende (fuer einheitliche Rhythmik) -- */
   --abschnitt-y:    clamp(1.6rem, 3.2vw, 2.4rem);  /* Innenabstand oben/unten JEDES Abschnitts */
   --hoehe-page-hero: 260px;                      /* EINHEITLICHE Hoehe der Unterseiten-Koepfe   */
+  --hoehe-header:    74px;                       /* Kopfzeile. WICHTIG: render.js setzt den Header
+                                                    erst per JS ein; style.css reserviert diesen
+                                                    Platz vorab, damit der Inhalt nicht springt.
+                                                    Beide Stellen lesen diesen einen Wert.       */
   --container-x:    1.25rem;                     /* seitlicher Rand des Inhalts-Containers    */
   --titel-abstand:  var(--raum-4);              /* Ueberschrift -> Folgetext                 */
   --absatz-abstand: var(--raum-4);              /* Abstand zwischen Absaetzen                */
