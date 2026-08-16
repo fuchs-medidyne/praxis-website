@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Datenschutzerklärung — Hausarztcenter Albstadt</title>
   <meta name="description" content="Datenschutzerklärung des Hausarztcenter Albstadt.">
+  <!-- Vorladen: Hero-Bild (steckt als CSS-Hintergrund in style.css und wuerde sonst erst
+       nach dem Parsen des Stylesheets entdeckt) und die beiden latin-Schriften. -->
+  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt.jpg">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/OpenSans-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="fonts/Montserrat-latin.woff2" crossorigin>
+  <!-- Reihenfolge zwingend: fonts, tokens, style. Frueher per @import in style.css -
+       das lud seriell und blockierte das Rendern doppelt (s. Kommentar in style.css). -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/style.css">
   <script defer src="data/site.js"></script>
   <script defer src="js/render.js"></script>

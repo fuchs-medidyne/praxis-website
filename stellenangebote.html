@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Karriere &amp; Stellenangebote — Hausarztcenter Albstadt</title>
   <meta name="description" content="Karriere im Hausarztcenter Albstadt — offene Stellen für Fachärzte für Allgemeinmedizin und Innere Medizin (w/m/d).">
+  <!-- Vorladen: Hero-Bild (steckt als CSS-Hintergrund in style.css und wuerde sonst erst
+       nach dem Parsen des Stylesheets entdeckt) und die beiden latin-Schriften. -->
+  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt.jpg">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/OpenSans-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="fonts/Montserrat-latin.woff2" crossorigin>
+  <!-- Reihenfolge zwingend: fonts, tokens, style. Frueher per @import in style.css -
+       das lud seriell und blockierte das Rendern doppelt (s. Kommentar in style.css). -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/style.css">
   <script defer src="data/site.js"></script>
   <script defer src="js/render.js"></script>
@@ -53,7 +62,7 @@
              unsere Zweigniederlassungen suchen wir engagierte Ärztinnen und Ärzte, die mit uns gemeinsam zu
              einer exzellenten Nahversorgung beitragen wollen.</p>
         </div>
-        <img src="bilder/team-arbeit.jpg" alt="Unser Team bei der Arbeit">
+        <img src="bilder/team-arbeit.jpg" alt="Unser Team bei der Arbeit" width="1600" height="1200">
       </div>
 
       <!-- Schnappschuesse aus dem Praxisalltag. Bewusst ohne Kartenrahmen und
@@ -61,9 +70,9 @@
            soll locker wirken. Ausschnitt kommt aus object-fit/object-position,
            die Dateien liegen im Originalformat. -->
       <div class="bilderband">
-        <img src="bilder/praxisalltag-team.jpg" alt="Drei Mitarbeiterinnen des Praxisteams" loading="lazy">
-        <img src="bilder/praxisalltag-besprechung.jpg" alt="Arzt und Kolleginnen im Gespräch auf dem Praxisflur" style="object-position: 50% 25%" loading="lazy">
-        <img src="bilder/praxisalltag-flur.jpg" alt="Zwei Kolleginnen lachen im Flur der Praxis" style="object-position: 50% 28%" loading="lazy">
+        <img src="bilder/praxisalltag-team.jpg" alt="Drei Mitarbeiterinnen des Praxisteams" loading="lazy" width="1000" height="750">
+        <img src="bilder/praxisalltag-besprechung.jpg" alt="Arzt und Kolleginnen im Gespräch auf dem Praxisflur" style="object-position: 50% 25%" loading="lazy" width="750" height="1000">
+        <img src="bilder/praxisalltag-flur.jpg" alt="Zwei Kolleginnen lachen im Flur der Praxis" style="object-position: 50% 28%" loading="lazy" width="750" height="1000">
       </div>
       <p class="bilderband-text">Zwischen den Sprechstunden bleibt bei uns Zeit für ein Lachen.</p>
     </section>

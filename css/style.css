@@ -3,8 +3,14 @@
    (Design-Konventionen / Single Source of Truth). Hier stehen nur Regeln, die
    diese Tokens auf konkrete Elemente anwenden — keine festen Werte. */
 
-@import url("fonts.css");
-@import url("tokens.css");
+/* fonts.css und tokens.css werden BEWUSST nicht mehr per @import geladen, sondern
+   als eigene <link rel="stylesheet"> im <head> jeder Seite — in dieser Reihenfolge:
+   fonts.css, tokens.css, style.css.
+   Grund: @import erzwingt eine serielle Ladekette (erst style.css holen und parsen,
+   dann die beiden Importe nachladen) und blockiert dadurch das Rendern doppelt.
+   Als <link> laden alle drei parallel. Gemessen 2026-08-16 (Lighthouse, s. Plan DESIGN).
+   Die Rolle der Dateien bleibt unveraendert: tokens.css ist weiterhin die Single Source
+   of Truth fuer Farben, Groessen und Abstaende. */
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }

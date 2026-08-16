@@ -57,7 +57,7 @@
     return '' +
       '<header class="site-header">\n' +
       '    <div class="container">\n' +
-      '      <a class="logo" href="index.html"><img src="bilder/logo-hausarztcenter-albstadt.png" alt="' + P.name + ' — Startseite"></a>\n' +
+      '      <a class="logo" href="index.html"><img src="bilder/logo-hausarztcenter-albstadt.png" width="300" height="67" alt="' + P.name + ' — Startseite"></a>\n' +
       '      <button class="nav-toggle" aria-expanded="false" aria-controls="hauptnavigation" aria-label="Menü öffnen">☰</button>\n' +
       '      <nav class="main-nav" id="hauptnavigation" aria-label="Hauptnavigation">\n' +
       '        <ul>\n          ' + punkte + '\n        </ul>\n' +

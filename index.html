@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hausarztcenter Albstadt — Praxis Diebold &amp; Fuchs</title>
   <meta name="description" content="Hausarztcenter Albstadt — hausärztliche Versorgung an zwei Standorten in Albstadt-Ebingen und Albstadt-Tailfingen. Online-Terminvergabe, Videosprechstunde.">
+  <!-- Vorladen: Hero-Bild (steckt als CSS-Hintergrund in style.css und wuerde sonst erst
+       nach dem Parsen des Stylesheets entdeckt) und die beiden latin-Schriften. -->
+  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt.jpg">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/OpenSans-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="fonts/Montserrat-latin.woff2" crossorigin>
+  <!-- Reihenfolge zwingend: fonts, tokens, style. Frueher per @import in style.css -
+       das lud seriell und blockierte das Rendern doppelt (s. Kommentar in style.css). -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/style.css">
   <script defer src="data/site.js"></script>
   <script defer src="js/render.js"></script>
@@ -55,7 +64,7 @@
              und ist deshalb gerade nicht sichtbar.
              <a href="#" data-consent-oeffnen>Jetzt aktivieren</a> – oder rufen Sie uns einfach an.</p>
         </div>
-        <img src="bilder/praxis-aussenansicht.jpg" alt="Unsere Praxis am Europaplatz in Albstadt-Ebingen">
+        <img src="bilder/praxis-aussenansicht.jpg" alt="Unsere Praxis am Europaplatz in Albstadt-Ebingen" width="1600" height="1200">
       </div>
     </section>
 
