@@ -35,6 +35,10 @@ body {
 main { flex: 1 0 auto; }
 
 img { max-width: 100%; height: auto; display: block; }
+/* <picture> dient nur der Formatwahl (WebP mit JPEG-Rueckfall) und darf das Layout
+   NICHT beeinflussen: display:contents nimmt es aus dem Box-Baum, sodass das <img>
+   selbst das Grid-/Flex-Kind bleibt — sonst braeche z. B. .split und .bilderband. */
+picture { display: contents; }
 
 a { color: var(--farbe-primaer); text-underline-offset: 2px; }
 a:hover { color: var(--farbe-primaer-dunkel); }
@@ -83,11 +87,14 @@ p:last-child { margin-bottom: 0; }
 
 /* --- Hero (Startseite) --- */
 .hero { position: relative; color: var(--farbe-text-invers); padding: var(--abschnitt-y) 0; background: var(--farbe-navy); overflow: hidden; }
+/* Hero-Hintergrund: WebP mit JPEG-Rueckfall.
+   Die ERSTE background-Deklaration ist der Rueckfall — Browser ohne image-set()
+   (sehr alte Geraete) ignorieren die zweite Zeile komplett und behalten das JPEG.
+   Alle aktuellen Browser nehmen die zweite und laden das WebP (139 statt 270 KB). */
 .hero::before {
   content: ""; position: absolute; inset: 0;
-  background:
-    var(--hero-schleier),
-    url("../bilder/hero-hausarzt-albstadt.jpg") center/cover no-repeat;
+  background: var(--hero-schleier), url("../bilder/hero-hausarzt-albstadt.jpg") center/cover no-repeat;
+  background: var(--hero-schleier), image-set(url("../bilder/hero-hausarzt-albstadt.webp") type("image/webp"), url("../bilder/hero-hausarzt-albstadt.jpg") type("image/jpeg")) center/cover no-repeat;
   z-index: 0;
 }
 .hero .container { position: relative; z-index: 1; text-align: center; }
@@ -98,7 +105,22 @@ p:last-child { margin-bottom: 0; }
 /* Seiten-Kopf fuer Unterseiten: Petrol-Verlauf UEBER dem Hero-Bild (Struktur
    statt Vollton) und FESTE, einheitliche Hoehe auf allen Seiten (Inhalt wird
    vertikal zentriert — 1- und 3-zeilige Einleitungen ergeben dieselbe Hoehe). */
+/* Unterseiten-Kopf — gleiche WebP/JPEG-Staffelung wie .hero::before (s. dort). */
 .page-hero { position: relative; color: var(--farbe-text-invers); display: flex; align-items: center; min-height: var(--hoehe-page-hero); padding: var(--raum-5) 0; background: var(--page-hero-schleier), url("../bilder/hero-hausarzt-albstadt.jpg") center/cover no-repeat; }
+.page-hero { background: var(--page-hero-schleier), image-set(url("../bilder/hero-hausarzt-albstadt.webp") type("image/webp"), url("../bilder/hero-hausarzt-albstadt.jpg") type("image/jpeg")) center/cover no-repeat; }
+
+/* Handy: kleinere Hero-Datei (1000 statt 2000 px, 44 statt 139 KB). Deckt auch
+   Displays mit doppelter Pixeldichte bis 500 CSS-px Breite ab.
+   ACHTUNG — diese Media Query MUSS direkt hinter ihren Basis-Regeln stehen.
+   Media Queries erhoehen die Spezifitaet nicht; weiter unten stehende Basis-Regeln
+   wuerden sie ueberschreiben (dieser Fehler ist am 2026-07-30 schon einmal
+   aufgetreten, s. Plan DESIGN). */
+@media (max-width: 560px) {
+  .hero::before { background: var(--hero-schleier), url("../bilder/hero-hausarzt-albstadt.jpg") center/cover no-repeat; }
+  .hero::before { background: var(--hero-schleier), image-set(url("../bilder/hero-hausarzt-albstadt-mobil.webp") type("image/webp"), url("../bilder/hero-hausarzt-albstadt.jpg") type("image/jpeg")) center/cover no-repeat; }
+  .page-hero { background: var(--page-hero-schleier), url("../bilder/hero-hausarzt-albstadt.jpg") center/cover no-repeat; }
+  .page-hero { background: var(--page-hero-schleier), image-set(url("../bilder/hero-hausarzt-albstadt-mobil.webp") type("image/webp"), url("../bilder/hero-hausarzt-albstadt.jpg") type("image/jpeg")) center/cover no-repeat; }
+}
 .page-hero .container { text-align: center; width: 100%; }
 .page-hero h1 { color: var(--farbe-text-invers); }
 .page-hero p { color: var(--farbe-text-invers-leise); font-size: var(--groesse-lead); margin: 0 auto; max-width: 46rem; }
@@ -267,7 +289,10 @@ img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-ra
    die volle Breite — dann aber flacher, damit es die Seite nicht sprengt. */
 @media (max-width: 700px) {
   .bilderband { grid-template-columns: 1fr 1fr; gap: var(--raum-3); }
-  .bilderband img:last-child:nth-child(odd) { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+  /* Zaehlt die <picture>-Wrapper, nicht die <img>: seit der WebP-Umstellung steckt
+     jedes Bild in einem eigenen <picture>, dadurch waere jedes <img> "erstes und
+     letztes Kind" und die Regel wuerde auf ALLE zutreffen. */
+  .bilderband picture:last-child:nth-child(odd) img { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
 }
 
 /* --- Gruppenbild (Team-Seite) ---

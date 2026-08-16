@@ -41,6 +41,20 @@
       .replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
+  // Bild mit WebP-Vorrang und JPEG-Rueckfall.
+  // Zu jedem .jpg unter bilder/ liegt eine gleichnamige .webp-Datei (erzeugt mit
+  // ImageMagick, s. Plan DESIGN). Aktuelle Browser nehmen das WebP, aeltere Geraete
+  // (z. B. iOS 13 und davor) fallen auf das JPEG zurueck und sehen weiterhin ein Bild.
+  // <picture> ist per CSS display:contents und beeinflusst das Layout nicht — das
+  // <img> bleibt das Grid-/Flex-Kind.
+  // rest = die uebrigen Attribute des <img>, inklusive fuehrendem Leerzeichen.
+  function bildTag(src, rest) {
+    var img = '<img src="' + src + '"' + (rest || "") + '>';
+    if (!/\.jpe?g$/i.test(src)) { return img; }
+    return '<picture><source srcset="' + src.replace(/\.jpe?g$/i, ".webp") +
+           '" type="image/webp">' + img + '</picture>';
+  }
+
   function datumLang(iso) {
     var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
     if (!m) { return iso || ""; }
@@ -124,7 +138,7 @@
     // site.js (standorte[].foto) hinterlegt ist.
     if (variant === "voll") {
       h += s.foto
-        ? '            <img class="karte-foto" src="' + s.foto + '" alt="Praxis ' + s.name + '">\n'
+        ? '            ' + bildTag(s.foto, ' class="karte-foto" alt="Praxis ' + s.name + '"') + '\n'
         : '            <div class="karte-foto bild-platzhalter bild-platzhalter--breit" role="img" aria-label="Foto der Niederlassung folgt"><span>Bild folgt: Praxis ' + s.name + '</span></div>\n';
     }
     h += '            <h3>Praxis ' + s.name + '</h3>\n';
@@ -172,7 +186,7 @@
     var karten = P.team.map(function (m) {
       var fokus = m.fokus ? ' style="object-position:' + m.fokus + '"' : '';
       var foto = m.foto
-        ? '<div class="person-foto"><img src="' + m.foto + '"' + fokus + ' alt="' + m.name + '"></div>'
+        ? '<div class="person-foto">' + bildTag(m.foto, fokus + ' alt="' + m.name + '"') + '</div>'
         : '<div class="person-foto person-foto--platzhalter" aria-hidden="true"></div>';
       return '<article class="karte karte--person">' + foto +
         '<h3>' + m.name + '</h3><p>' + m.rolle + '</p></article>';
@@ -189,7 +203,7 @@
     var karten = P.praxisteam.map(function (m) {
       var fokus = m.fokus ? ' style="object-position:' + m.fokus + '"' : '';
       var bild = m.foto
-        ? '<img src="' + m.foto + '"' + fokus + ' alt="' + attr(m.name) + '" loading="lazy">'
+        ? bildTag(m.foto, fokus + ' alt="' + attr(m.name) + '" loading="lazy"')
         : '<div class="portraet-platzhalter" aria-hidden="true"></div>';
       var umbruch = m.neueZeile ? " karte--neue-zeile" : "";
       return '<article class="karte karte--portraet' + umbruch + '">' + bild +
@@ -227,7 +241,7 @@
       // bildAlt beschreibt das Bild fuer Screenreader — fehlt es, gilt das Bild
       // als rein dekorativ (leeres alt) und wird uebersprungen.
       return '<article class="news-item news-item--bild">\n' +
-        '        <img src="' + n.bild + '" alt="' + attr(n.bildAlt || "") + '" loading="lazy">\n' +
+        '        ' + bildTag(n.bild, ' alt="' + attr(n.bildAlt || "") + '" loading="lazy"') + '\n' +
         '        <div>\n          ' + inhalt + '\n        </div>\n' +
         '      </article>';
     }).join("\n      ");

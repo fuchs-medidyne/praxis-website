@@ -7,7 +7,8 @@
   <meta name="description" content="Leistungen des Hausarztcenter Albstadt: Diagnostik, Vorsorge, chronische Erkrankungen, Impfungen, Labordiagnostik und spezielle Untersuchungen.">
   <!-- Vorladen: Hero-Bild (steckt als CSS-Hintergrund in style.css und wuerde sonst erst
        nach dem Parsen des Stylesheets entdeckt) und die beiden latin-Schriften. -->
-  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt.jpg">
+  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt-mobil.webp" type="image/webp" media="(max-width: 560px)">
+  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt.webp" type="image/webp" media="(min-width: 561px)">
   <link rel="preload" as="font" type="font/woff2" href="fonts/OpenSans-latin.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="fonts/Montserrat-latin.woff2" crossorigin>
   <!-- Reihenfolge zwingend: fonts, tokens, style. Frueher per @import in style.css -
@@ -62,7 +63,10 @@
             <li>HzV-Versorgung</li>
           </ul>
         </div>
-        <img src="bilder/diagnostik.jpg" alt="Diagnostik in unserer Praxis" width="1200" height="1600">
+        <picture>
+          <source srcset="bilder/diagnostik.webp" type="image/webp">
+          <img src="bilder/diagnostik.jpg" alt="Diagnostik in unserer Praxis" width="1200" height="1600">
+        </picture>
       </div>
     </section>
 
@@ -91,7 +95,10 @@
               <li>Versorgung nach Operationen</li>
             </ul>
           </div>
+          <picture>
+          <source srcset="bilder/vorsorge.webp" type="image/webp">
           <img src="bilder/vorsorge.jpg" alt="Vorsorge und Betreuung" width="1306" height="1600">
+        </picture>
         </div>
       </div>
     </section>
@@ -108,7 +115,10 @@
             <li>Reiseimpfberatung / Impfungen (privat und Selbstzahler)</li>
           </ul>
         </div>
-        <img src="bilder/impfungen.jpg" alt="Arm mit buntem Pflaster nach einer Impfung" width="1200" height="1600">
+        <picture>
+          <source srcset="bilder/impfungen.webp" type="image/webp">
+          <img src="bilder/impfungen.jpg" alt="Arm mit buntem Pflaster nach einer Impfung" width="1200" height="1600">
+        </picture>
       </div>
     </section>
 
@@ -124,7 +134,10 @@
               <li>Troponin-Schnelltest nach ärztlicher Indikation (Ergebnis nach 20 Min.)</li>
             </ul>
           </div>
+          <picture>
+          <source srcset="bilder/labor.webp" type="image/webp">
           <img src="bilder/labor.jpg" alt="Labordiagnostik" width="1600" height="1200">
+        </picture>
         </div>
       </div>
     </section>

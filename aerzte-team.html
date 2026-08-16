@@ -7,7 +7,8 @@
   <meta name="description" content="Das Behandlungs-Team des Hausarztcenter Albstadt — Ärztinnen, Ärzte und Praxisteam.">
   <!-- Vorladen: Hero-Bild (steckt als CSS-Hintergrund in style.css und wuerde sonst erst
        nach dem Parsen des Stylesheets entdeckt) und die beiden latin-Schriften. -->
-  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt.jpg">
+  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt-mobil.webp" type="image/webp" media="(max-width: 560px)">
+  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt.webp" type="image/webp" media="(min-width: 561px)">
   <link rel="preload" as="font" type="font/woff2" href="fonts/OpenSans-latin.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="fonts/Montserrat-latin.woff2" crossorigin>
   <!-- Reihenfolge zwingend: fonts, tokens, style. Frueher per @import in style.css -
@@ -46,7 +47,10 @@
 
     <section class="container">
       <figure class="gruppenbild">
-        <img src="bilder/team-gesamt.jpg" alt="Das Team des Hausarztcenter Albstadt" width="1600" height="1320">
+        <picture>
+          <source srcset="bilder/team-gesamt.webp" type="image/webp">
+          <img src="bilder/team-gesamt.jpg" alt="Das Team des Hausarztcenter Albstadt" width="1600" height="1320">
+        </picture>
         <figcaption>Das Team des Hausarztcenter Albstadt – Ärzte und Medizinische Fachangestellte.</figcaption>
       </figure>
     </section>

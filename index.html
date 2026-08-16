@@ -7,7 +7,8 @@
   <meta name="description" content="Hausarztcenter Albstadt — hausärztliche Versorgung an zwei Standorten in Albstadt-Ebingen und Albstadt-Tailfingen. Online-Terminvergabe, Videosprechstunde.">
   <!-- Vorladen: Hero-Bild (steckt als CSS-Hintergrund in style.css und wuerde sonst erst
        nach dem Parsen des Stylesheets entdeckt) und die beiden latin-Schriften. -->
-  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt.jpg">
+  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt-mobil.webp" type="image/webp" media="(max-width: 560px)">
+  <link rel="preload" as="image" href="bilder/hero-hausarzt-albstadt.webp" type="image/webp" media="(min-width: 561px)">
   <link rel="preload" as="font" type="font/woff2" href="fonts/OpenSans-latin.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="fonts/Montserrat-latin.woff2" crossorigin>
   <!-- Reihenfolge zwingend: fonts, tokens, style. Frueher per @import in style.css -
@@ -64,7 +65,10 @@
              und ist deshalb gerade nicht sichtbar.
              <a href="#" data-consent-oeffnen>Jetzt aktivieren</a> – oder rufen Sie uns einfach an.</p>
         </div>
-        <img src="bilder/praxis-aussenansicht.jpg" alt="Unsere Praxis am Europaplatz in Albstadt-Ebingen" width="1600" height="1200">
+        <picture>
+          <source srcset="bilder/praxis-aussenansicht.webp" type="image/webp">
+          <img src="bilder/praxis-aussenansicht.jpg" alt="Unsere Praxis am Europaplatz in Albstadt-Ebingen" width="1600" height="1200">
+        </picture>
       </div>
     </section>
 
