@@ -26,6 +26,16 @@ body {
   font-size: calc(var(--groesse-text) * var(--eh-schrift, 1));
   letter-spacing: var(--eh-abstand, normal);
   -webkit-font-smoothing: antialiased;
+  /* Lange, ununterbrochene Zeichenketten — deutsche Komposita wie
+     „Barrierefreiheitserklaerung" oder ausgeschriebene URLs im Datenschutztext —
+     sind auf dem Handy breiter als der Textbereich und schoben die ganze Seite
+     waagerecht auf (barrierefreiheit.html 437 px, datenschutz.html 439 px bei
+     400 px Viewport). Gefunden am 2026-08-23, als layout-check.sh zum ersten Mal
+     wirklich bei 400 px messen konnte — davor erzwang Edge headless eine
+     Mindestfensterbreite von 492 px, der Handy-Breakpoint wurde also nie geprueft.
+     break-word bricht ein Wort NUR, wenn es sonst ueberlaufen wuerde; auf den
+     normalen Textfluss hat die Regel keine sichtbare Wirkung. */
+  overflow-wrap: break-word;
   /* Footer klebt am Seitenende, auch bei kurzen Seiten (z.B. Aktuelles) */
   min-height: 100svh;
   display: flex;
