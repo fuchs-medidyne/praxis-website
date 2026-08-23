@@ -130,10 +130,20 @@
       '  </footer>';
   }
 
+  // Anker einer Niederlassung. Dieselbe Kennung landet im HTML (als id der
+  // Karte) und in den Strukturdaten (als @id) — an einer Stelle erzeugt, damit
+  // beide nicht auseinanderlaufen koennen.
+  function standortAnker(s) {
+    return "standort-" + s.id;
+  }
+
   // Eine Standort-Karte. variant "voll" (Praxen-Seite) zeigt Oeffnungszeiten,
   // Status-Badge und Schliesszeiten; "kontakt" (Service-Seite) nur Kontaktdaten.
   function standortKarte(s, variant) {
-    var h = '<article class="karte">\n';
+    // Der id-Anker macht die Karte direkt verlinkbar (praxen.html#standort-ebingen)
+    // und gibt der Niederlassung in den Strukturdaten eine eigene Adresse. Je Seite
+    // gibt es hoechstens ein standorte-Raster, die Kennungen bleiben also eindeutig.
+    var h = '<article class="karte" id="' + standortAnker(s) + '">\n';
     // Foto der Niederlassung (nur Praxen-Seite). Platzhalter, bis ein Bild in
     // site.js (standorte[].foto) hinterlegt ist.
     if (variant === "voll") {
@@ -271,6 +281,15 @@
     var graph = P.standorte.map(function (s) {
       return {
         "@type": "MedicalClinic",
+        // Eigene, stabile Kennung je Niederlassung — sonst stehen dort zwei
+        // MedicalClinic ohne Unterscheidungsmerkmal und Suchmaschinen muessen
+        // raten, ob es zwei Praxen oder zwei Beschreibungen derselben sind.
+        // url zeigt auf die Seite, die die Niederlassung beschreibt.
+        // Beides aus P.basisUrl — der einzigen Stelle, an der die Domain steht.
+        // ACHTUNG: das gilt NUR fuer JSON-LD. canonical und die og:-Tags bleiben
+        // statisch im HTML, s. Kommentar bei basisUrl in data/site.js.
+        "@id": P.basisUrl + "/praxen.html#" + standortAnker(s),
+        "url": P.basisUrl + "/praxen.html",
         "name": P.name + " – " + s.name,
         "address": {
           "@type": "PostalAddress",
