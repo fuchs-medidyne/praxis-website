@@ -19,6 +19,20 @@ window.PRAXIS = {
   gesellschafter: ["Dr. med. F. Diebold", "Dr. med. C. Fuchs"],
   jahr: 2026,
 
+  // Basis-URL der Seite, ohne Schraegstrich am Ende. Das ist die EINZIGE Stelle,
+  // an der die Domain steht: canonical, og:url, og:image, sitemap.xml und
+  // robots.txt werden daraus erzeugt — von workway/scripts/basis-url.sh.
+  // Domainwechsel = diese eine Zeile aendern, Skript mit --schreiben laufen lassen.
+  //
+  // NICHT "aufraeumen": diese Meta-Angaben stehen bewusst STATISCH im HTML jeder
+  // Seite und werden NICHT von render.js gesetzt. Social-Scanner (WhatsApp,
+  // Facebook, LinkedIn, Signal) fuehren kein JavaScript aus — per JS gesetzte
+  // og:-Tags waeren fuer sie unsichtbar und die Link-Vorschau bliebe leer. Und ein
+  // per JS gesetztes canonical ist fuer Suchmaschinen ausdruecklich schwaecher als
+  // ein statisches. Die Wiederholung im HTML ist hier der richtige Preis;
+  // zusammengehalten wird sie vom Skript, nicht vom Browser.
+  basisUrl: "https://www.hausarztcenter-albstadt.de",
+
   // Online-Terminvergabe (samedi). Der Slug ist eine samedi-vergebene Konto-
   // Kennung — nicht aendern, sonst bricht der Buchungslink.
   samediUrl: "https://termin.samedi.de/b/berufsausubungsgemeinschaft-gbr-dr-med-diebold-dr-med-schmid-c-fuchs/1",
