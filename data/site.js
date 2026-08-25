@@ -110,7 +110,7 @@ window.PRAXIS = {
         { tag: "Do", vormittag: "08:00–11:00", nachmittag: null },
         { tag: "Fr", vormittag: "08:00–11:00", nachmittag: null }
       ],
-      schliessungen: ["30.03.–24.04.2026", "04.05.–08.05.2026", "15.05.2026", "01.06.–05.06.2026"]
+      schliessungen: ["30.03.–24.04.2026", "04.05.–08.05.2026", "15.05.2026", "01.06.–05.06.2026", "03.08.–25.09.2026", "26.10.–06.11.2026", "16.11.–20.11.2026", "21.12.–31.12.2026"]
     }
   ],
 
@@ -152,7 +152,7 @@ window.PRAXIS = {
     { name: "Fr. Di Valentino", rolle: "Medizinische Fachangestellte", foto: "bilder/team/di-valentino.jpg" },
     { name: "Fr. Lebherz",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/lebherz.jpg" },
     { name: "Fr. Papadopolou",  rolle: "Medizinische Fachangestellte", foto: "bilder/team/papadopolou.jpg" },
-    { name: "Fr. Podstavska",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/podstavska.jpg" },
+    { name: "Fr. Podstawska",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/podstavska.jpg" },
     { name: "Fr. Schillmann",   rolle: "Medizinische Fachangestellte", foto: "bilder/team/schillmann.jpg" },
     { name: "Fr. Stelzig",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/stelzig.jpg" },
     { name: "Fr. Stiefel",      rolle: "Medizinische Fachangestellte", foto: "bilder/team/stiefel.jpg" },
