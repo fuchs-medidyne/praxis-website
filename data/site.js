@@ -182,7 +182,29 @@ window.PRAXIS = {
   // Bilder nach bilder/news/ legen, benannt nach Datum + Thema, und vorher als
   // JPG speichern (nicht als PNG aus dem Grafikprogramm — das ist um ein
   // Vielfaches groesser und laedt auf dem Handy spuerbar langsamer).
+  // Befristete Meldungen (Urlaub, Vertretung, geaenderte Sprechzeiten):
+  //   sichtbarBis: "JJJJ-MM-TT" -> letzter Tag, an dem die Meldung erscheint;
+  //     danach verschwindet sie von selbst (Aktuell-Seite und Startseite).
+  //   banner: "Kurzer Satz" (optional) -> solange sichtbar, zusaetzlich als
+  //     Balken ganz oben auf der Startseite, verlinkt auf die Aktuell-Seite.
+  // Dauerhafte Meldungen ohne sichtbarBis bleiben in der Liste stehen.
   news: [
+    {
+      datum: "2026-11-12",
+      titel: "Praxis geschlossen vom 16. bis 20. November – Vertretung",
+      sichtbarBis: "2026-11-22",
+      banner: "Praxis vom 16. bis 20. November geschlossen – Vertretung und Notdienst",
+      bild: "bilder/news/2026-11-12-praxis-geschlossen.jpg",
+      bildAlt: "",
+      text: "Unsere Praxen in Ebingen und Tailfingen bleiben von <strong>Montag, 16. November, " +
+            "bis Freitag, 20. November 2026</strong> geschlossen. In dieser Zeit übernehmen die Vertretung:<br>" +
+            "<strong>Dr. med. Luithardt</strong>, Ebingen, Tel. <a href=\"tel:+4974314543\">07431 4543</a><br>" +
+            "<strong>Dr. med. Sztur</strong>, Tailfingen, Tel. <a href=\"tel:+4974325161\">07432 5161</a><br>" +
+            "Nachts und am Wochenende erreichen Sie den ärztlichen Bereitschaftsdienst unter " +
+            "<a href=\"tel:116117\">116 117</a>, in lebensbedrohlichen Notfällen die <a href=\"tel:112\">112</a>. " +
+            "Ab <strong>Montag, 23. November 2026</strong>, sind wir wie gewohnt wieder für Sie da.",
+      link: null
+    },
     {
       datum: "2026-07-28",
       titel: "Unsere neue Internetseite — und ab jetzt auch bei Facebook und Instagram",

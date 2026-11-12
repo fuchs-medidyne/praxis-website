@@ -61,6 +61,15 @@
     return parseInt(m[3], 10) + ". " + MONATE[parseInt(m[2], 10) - 1] + " " + m[1];
   }
 
+  // Nur Meldungen, deren sichtbarBis (falls gesetzt) noch nicht vorbei ist.
+  // Vergleich als Text "JJJJ-MM-TT" in Ortszeit des Besuchers.
+  var jetzt = new Date();
+  var heute = jetzt.getFullYear() + "-" + ("0" + (jetzt.getMonth() + 1)).slice(-2) + "-" +
+              ("0" + jetzt.getDate()).slice(-2);
+  var aktuelleNews = (P.news || []).filter(function (n) {
+    return !n.sichtbarBis || heute <= n.sichtbarBis;
+  });
+
   /* ---- Komponenten (geben HTML-Strings zurueck) ----------------------- */
 
   function header() {
@@ -225,17 +234,17 @@
   // News. variant "liste" (Aktuell-Seite) zeigt alle Eintraege bzw. einen
   // neutralen Hinweis; "teaser" (Startseite) zeigt nur den neuesten Eintrag.
   function news(variant) {
-    if (!P.news || P.news.length === 0) {
+    if (aktuelleNews.length === 0) {
       if (variant === "teaser") { return ""; }
       return '<p>Zurzeit liegen keine besonderen Mitteilungen vor. Aktuelle Hinweise zu Sprechzeiten,\n' +
              '         Vertretungen und geplanten Schließungen finden Sie an dieser Stelle, sobald sie anstehen.</p>';
     }
     if (variant === "teaser") {
-      var n = P.news[0];
+      var n = aktuelleNews[0];
       return '<div class="hinweis"><strong>' + n.titel + '</strong> ' + n.text +
              ' <a href="aktuell.html">Mehr unter „Aktuell"</a></div>';
     }
-    return P.news.map(function (n) {
+    return aktuelleNews.map(function (n) {
       var link = n.link ? ' <a href="' + n.link + '">Mehr erfahren</a>' : '';
       var inhalt =
         '<p class="news-datum">' + datumLang(n.datum) + '</p>\n' +
@@ -255,6 +264,14 @@
         '        <div>\n          ' + inhalt + '\n        </div>\n' +
         '      </article>';
     }).join("\n      ");
+  }
+
+  // Balken oben auf der Startseite: erste aktuelle Meldung mit "banner".
+  function banner() {
+    var n = aktuelleNews.filter(function (x) { return x.banner; })[0];
+    if (!n) { return ""; }
+    return '<a class="banner" href="aktuell.html"><span class="container">' +
+           '<strong>' + n.banner + '</strong> <span class="banner-mehr">Mehr erfahren →</span></span></a>';
   }
 
   /* ---- SEO: Strukturdaten (JSON-LD) aus denselben Daten --------------- */
@@ -318,6 +335,7 @@
 
   setze('[data-component="site-header"]', header());
   setze('[data-component="site-footer"]', footer());
+  setze('[data-component="banner"]', banner());
 
   document.querySelectorAll('[data-component="standorte"]').forEach(function (el) {
     el.outerHTML = standorte(el.getAttribute("data-variant") || "voll");

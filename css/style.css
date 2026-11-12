@@ -226,6 +226,18 @@ section[id] { scroll-margin-top: 90px; }
 .karte-foto { margin-bottom: var(--raum-4); }
 img.karte-foto { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-radius: var(--radius-s); }
 
+/* Balken oben auf der Startseite fuer befristete Meldungen (render.js banner) */
+.banner { display: block; background: var(--farbe-akzent); color: var(--farbe-navy); text-decoration: none; text-align: center; padding: var(--raum-3) 0; }
+.banner .container { display: block; }
+.banner-mehr { white-space: nowrap; text-decoration: underline; }
+.banner:hover .banner-mehr, .banner:focus-visible .banner-mehr { text-decoration: none; }
+/* Handy: rechts Platz lassen fuer den fest stehenden Eingabehilfen-Knopf
+   (.eh-knopf), der sonst ueber dem Bannertext liegt. */
+@media (max-width: 760px) {
+  .banner { text-align: left; }
+  .banner .container { padding-right: calc(var(--raum-8) + var(--raum-4)); }
+}
+
 .hinweis { border-left: 4px solid var(--farbe-akzent); background: var(--farbe-bg-leise); padding: var(--raum-4) var(--raum-5); border-radius: 0 var(--radius-s) var(--radius-s) 0; margin: 0 0 var(--block-abstand); }
 
 /* Hinweis an den Stellen, die auf die Online-Rezeption verweisen: sichtbar nur,
